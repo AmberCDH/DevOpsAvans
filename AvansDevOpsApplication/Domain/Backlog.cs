@@ -3,23 +3,28 @@
     public class Backlog
     {
         private Guid id;
+        private string name;
+        private string description;
         private List<BacklogItem> backlogItems;
         private List<Sprint> sprints;
 
-        public Backlog()
+        public Backlog(string name, string description)
         {
             backlogItems = [];
+            sprints = [];
             id = Guid.NewGuid();
+            this.name = name;
+            this.description = description;
         }
 
         public void AddBacklogItem(BacklogItem backlogItem)
         {
-
+            backlogItems.Add(backlogItem);
         }
 
         public void RemoveBacklogItem(Guid id)
         {
-
+            backlogItems.RemoveAll(x => x.Id == id);
         }
 
         public void AddSprint(Sprint sprint)
