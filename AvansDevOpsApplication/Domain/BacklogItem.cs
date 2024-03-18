@@ -5,6 +5,7 @@ namespace AvansDevOpsApplication.Domain
 {
     public class BacklogItem
     {
+        private Guid id;
         private string name;
         private string description;
         private List<Activity> activitys;
@@ -19,6 +20,7 @@ namespace AvansDevOpsApplication.Domain
             this.timeOfCreation = timeOfCreation;
             this.inList = inList;
             this.activitys = activitys ?? new List<Activity>();
+            this.id = Guid.NewGuid();
         }
 
         public string Name { get => name; set => name = value; }
