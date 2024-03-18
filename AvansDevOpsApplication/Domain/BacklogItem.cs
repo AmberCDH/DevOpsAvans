@@ -42,5 +42,10 @@ namespace AvansDevOpsApplication.Domain
             return "BacklogItem ~ Name; " + name + "; description ~ " + description + "; timeOfCreation ~ " + timeOfCreation + "; Activity's ~ " + activitys.Count;
 
         }
+
+        public Guid Id
+        {
+            get { return id; }
+        }
     }
 }
