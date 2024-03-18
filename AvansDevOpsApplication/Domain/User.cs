@@ -2,6 +2,7 @@
 {
     public class User
     {
+        private Guid id;
         private string name;
         private string email;
         private int age;
@@ -15,6 +16,7 @@
             this.age = age;
             this.birthday = birthday;
             this.role = role;
+            this.id = Guid.NewGuid();
         }
         public RoleType Role { 
             get { return role; }  
