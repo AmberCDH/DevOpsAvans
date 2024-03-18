@@ -1,7 +1,4 @@
-﻿
-using System.Xml.Linq;
-
-namespace AvansDevOpsApplication.Domain
+﻿namespace AvansDevOpsApplication.Domain
 {
     public class BacklogItem
     {
