@@ -15,7 +15,7 @@
 
         public override void Print()
         {
-            Console.WriteLine($" Reaction; {user.Name} {user.Email} ~ {answer} - {timestamp}");
+            Console.WriteLine($" >Reaction; {user.Name} {user.Email} ~ {answer} - {timestamp}");
         }
 
 

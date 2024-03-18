@@ -27,7 +27,7 @@
 
         public override void Print()
         {
-            Console.WriteLine($" Forum; {backlogItem.Name} {backlogItem.TimeOfCreation}");
+            Console.WriteLine($" >Forum; Backlog item ~ {backlogItem.Name} {backlogItem.TimeOfCreation}");
             foreach (ForumComponent forumComponent in children)
             {
                 forumComponent.Print();

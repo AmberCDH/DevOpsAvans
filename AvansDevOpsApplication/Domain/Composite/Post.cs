@@ -34,7 +34,7 @@
 
         public override void Print()
         {
-            Console.WriteLine($" Post; {user.Name} {user.Email} ~ {question} - {description} - {timestamp}");
+            Console.WriteLine($" >Post; {user.Name} {user.Email} ~ {question} - {description} - {timestamp}");
             foreach (ForumComponent forumComponent in children)
             {
                 forumComponent.Print();
