@@ -59,11 +59,38 @@ namespace AvansDevOpsApplication.Domain
             get { return id; }
         }
 
-        public void SetState(ItemState state)
+        public void SetState(ItemState x)
         {
-            if(state == ItemState.Doing && assignedUsers.Count > 0)
+            switch (itemState)
             {
-               itemState = state;
+                case ItemState.Todo:
+                    if (x == ItemState.Doing && assignedUsers.Count > 0)
+                    {
+                        itemState = x;
+                        NotifyObserver("Item in progress");
+                    }
+                    break;
+
+                case ItemState.Doing:
+                    if (x == ItemState.Testing)
+                    {
+                        itemState = x;
+                        NotifyObserver("Item ready for testing");
+                    }
+                    break;
+
+                case ItemState.Testing:
+                    if (x == ItemState.Doing)
+                    {
+                        itemState = x;
+                        NotifyObserver("Testfindings");
+                    }
+                    if (x == ItemState.Done)
+                    {
+                        itemState = x;
+                        NotifyObserver("Item done");
+                    }
+                    break;
             }
         }
     }
