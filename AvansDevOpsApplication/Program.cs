@@ -1,6 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using AvansDevOpsApplication.Domain;
 using AvansDevOpsApplication.Domain.Composite;
+using AvansDevOpsApplication.Domain.Factory;
 
 var localDate = DateTime.Now;
 var birthday = new DateOnly(2000, 1, 12);
@@ -30,3 +31,9 @@ FirstUserStory.Add(new Post("Waar is de rest van dit item?", "US is onduidelijk"
 FirstUserStory.Add(new Post("Help?", "US is onduidelijk", localDate, user, reactionsUS2));
 
 FirstUserStory.Print(); 
+
+// Factory export
+Report report = new Report();
+Console.WriteLine(report.createExport("pdf"));
+Console.WriteLine(report.createExport("png"));
+Console.WriteLine(report.createExport(""));
