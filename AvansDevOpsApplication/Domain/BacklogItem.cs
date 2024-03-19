@@ -1,6 +1,8 @@
-﻿namespace AvansDevOpsApplication.Domain
+﻿using AvansDevOpsApplication.Domain.Observer;
+
+namespace AvansDevOpsApplication.Domain
 {
-    public class BacklogItem
+    public class BacklogItem : ISubject
     {
         private Guid id;
         private string name;
@@ -10,6 +12,8 @@
         private bool wantsNotification;
         private string inList;
         private DateTime timeOfCreation;
+        private List<User> usersToNotify = [];
+
         public BacklogItem(string name, string description, List<Activity>? activitys, DateTime timeOfCreation, string inList)
         {
             this.name = name;
@@ -38,6 +42,24 @@
         {
             return "BacklogItem ~ Name; " + name + "; description ~ " + description + "; timeOfCreation ~ " + timeOfCreation + "; Activity's ~ " + activitys.Count;
 
+        }
+
+        public void RegisterObserver(User user)
+        {
+            usersToNotify.Add(user);
+        }
+
+        public void RemoveObserver(User user)
+        {
+            usersToNotify.Remove(user);
+        }
+
+        public void NotifyObserver(string message)
+        {
+            foreach (User user in usersToNotify)
+            {
+                user.GetNotificationService().Update(message);
+            }
         }
 
         public Guid Id
