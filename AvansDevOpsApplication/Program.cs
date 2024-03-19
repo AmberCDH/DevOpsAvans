@@ -1,10 +1,12 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using AvansDevOpsApplication.Domain;
 using AvansDevOpsApplication.Domain.Composite;
+using AvansDevOpsApplication.Domain.Observer;
 
 var localDate = DateTime.Now;
 var birthday = new DateOnly(2000, 1, 12);
-var user = new User("Tom", "t@mail.com", 24, birthday, RoleType.LEAD_DEVELOPER);
+var notificationService = new EmailObserver();
+var user = new User("Tom", "t@mail.com", 24, birthday, RoleType.LEAD_DEVELOPER, notificationService);
 Console.WriteLine(user.toString());
 user.Name = "Test";
 Console.WriteLine(user.toString());
