@@ -12,7 +12,8 @@ namespace AvansDevOpsApplication.Domain
         private bool wantsNotification;
         private string inList;
         private DateTime timeOfCreation;
-        private List<User> usersToNotify = [];
+        private List<User> assignedUsers = [];
+        private ItemState itemState;
 
         public BacklogItem(string name, string description, List<Activity>? activitys, DateTime timeOfCreation, string inList)
         {
@@ -22,6 +23,7 @@ namespace AvansDevOpsApplication.Domain
             this.inList = inList;
             this.activitys = activitys ?? new List<Activity>();
             this.id = Guid.NewGuid();
+            itemState = ItemState.Todo;
         }
 
         public string Name { get => name; set => name = value; }
@@ -44,27 +46,72 @@ namespace AvansDevOpsApplication.Domain
 
         }
 
-        public void RegisterObserver(User user)
-        {
-            usersToNotify.Add(user);
-        }
-
-        public void RemoveObserver(User user)
-        {
-            usersToNotify.Remove(user);
-        }
-
         public void NotifyObserver(string message)
         {
-            foreach (User user in usersToNotify)
+            foreach (User user in assignedUsers)
             {
                 user.GetNotificationService().Update(message);
+            }
+        }
+
+        public void AssignUser(User user)
+        {
+            assignedUsers.Add(user);
+        }
+
+        public void RemoveUser(User user)
+        {
+            if (assignedUsers.Count <= 1)
+            {
+                if (itemState == ItemState.Todo)
+                {
+                    assignedUsers.Remove(user);
+                }
+            }
+            else
+            {
+                assignedUsers.Remove(user);
             }
         }
 
         public Guid Id
         {
             get { return id; }
+        }
+
+        public void SetState(ItemState x)
+        {
+            switch (itemState)
+            {
+                case ItemState.Todo:
+                    if (x == ItemState.Doing && assignedUsers.Count > 0)
+                    {
+                        itemState = x;
+                        NotifyObserver("Item in progress");
+                    }
+                    break;
+
+                case ItemState.Doing:
+                    if (x == ItemState.Testing)
+                    {
+                        itemState = x;
+                        NotifyObserver("Item ready for testing");
+                    }
+                    break;
+
+                case ItemState.Testing:
+                    if (x == ItemState.Doing)
+                    {
+                        itemState = x;
+                        NotifyObserver("Testfindings");
+                    }
+                    if (x == ItemState.Done)
+                    {
+                        itemState = x;
+                        NotifyObserver("Item done");
+                    }
+                    break;
+            }
         }
     }
 }

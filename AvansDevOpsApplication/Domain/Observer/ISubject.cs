@@ -8,8 +8,6 @@ namespace AvansDevOpsApplication.Domain.Observer
 {
     public interface ISubject
     {
-        void RegisterObserver(User user);
-        void RemoveObserver(User user);
         void NotifyObserver(string message);
     }
 }
