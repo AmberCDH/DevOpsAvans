@@ -54,6 +54,26 @@ namespace AvansDevOpsApplication.Domain
             }
         }
 
+        public void AssignUser(User user)
+        {
+            assignedUsers.Add(user);
+        }
+
+        public void RemoveUser(User user)
+        {
+            if (assignedUsers.Count <= 1)
+            {
+                if (itemState == ItemState.Todo)
+                {
+                    assignedUsers.Remove(user);
+                }
+            }
+            else
+            {
+                assignedUsers.Remove(user);
+            }
+        }
+
         public Guid Id
         {
             get { return id; }
