@@ -12,7 +12,8 @@ namespace AvansDevOpsApplication.Domain
         private bool wantsNotification;
         private string inList;
         private DateTime timeOfCreation;
-        private List<User> usersToNotify = [];
+        private List<User> assignedUsers = [];
+        private ItemState itemState;
 
         public BacklogItem(string name, string description, List<Activity>? activitys, DateTime timeOfCreation, string inList)
         {
@@ -22,6 +23,7 @@ namespace AvansDevOpsApplication.Domain
             this.inList = inList;
             this.activitys = activitys ?? new List<Activity>();
             this.id = Guid.NewGuid();
+            itemState = ItemState.Todo;
         }
 
         public string Name { get => name; set => name = value; }
@@ -44,19 +46,9 @@ namespace AvansDevOpsApplication.Domain
 
         }
 
-        public void RegisterObserver(User user)
-        {
-            usersToNotify.Add(user);
-        }
-
-        public void RemoveObserver(User user)
-        {
-            usersToNotify.Remove(user);
-        }
-
         public void NotifyObserver(string message)
         {
-            foreach (User user in usersToNotify)
+            foreach (User user in assignedUsers)
             {
                 user.GetNotificationService().Update(message);
             }
@@ -65,6 +57,14 @@ namespace AvansDevOpsApplication.Domain
         public Guid Id
         {
             get { return id; }
+        }
+
+        public void SetState(ItemState state)
+        {
+            if(state == ItemState.Doing && assignedUsers.Count > 0)
+            {
+               itemState = state;
+            }
         }
     }
 }
