@@ -2,17 +2,23 @@
 {
     public class Activity
     {
+        private string name;
         private string comment;
         private string movedTo;
         private string movedFrom;
         private DateTime time;
+        private BacklogItem backlogItem;
+        private ActivityState activityState;
 
-        public Activity(string comment, string movedTo, string movedFrom, DateTime time)
+        public Activity(string comment, string movedTo, string movedFrom, DateTime time, BacklogItem backlogItem, string name)
         {
             this.comment = comment;
             this.movedTo = movedTo;
             this.movedFrom = movedFrom;
             this.time = time;
+            this.backlogItem = backlogItem;
+            this.name = name;
+            this.activityState = ActivityState.Todo; 
         }
 
         public string Comment
@@ -37,6 +43,20 @@
         public string toString()
         {
             return "Activity ~ Comment; " + comment + " ~ " + time;
+        }
+
+        public void SetState(ActivityState x)
+        {
+            switch (activityState)
+            {
+                case ActivityState.Todo:
+                    if(x == ActivityState.Done)
+                    {
+                        activityState = x;
+                        backlogItem.NotifyObserver("Activity: " + name + " completed");
+                    }
+                    break;
+            }
         }
     }
 }

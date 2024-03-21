@@ -11,7 +11,9 @@ namespace AvansDevOpsApplication.Domain
         private User user;
         private bool wantsNotification;
         private string inList;
+        private int effort;
         private DateTime timeOfCreation;
+        private DateTime timeCompleted;
         private List<User> assignedUsers = [];
         private ItemState itemState;
 
@@ -79,6 +81,19 @@ namespace AvansDevOpsApplication.Domain
             get { return id; }
         }
 
+        public ItemState ItemState
+        {
+            get { return itemState; }
+        }
+
+        public DateTime TimeCompleted
+        { get { return timeCompleted; } }
+        public int Effort
+        {
+            get { return effort; }
+            set {  effort = value; }
+        }
+
         public void SetState(ItemState x)
         {
             switch (itemState)
@@ -108,6 +123,7 @@ namespace AvansDevOpsApplication.Domain
                     if (x == ItemState.Done)
                     {
                         itemState = x;
+                        timeCompleted = DateTime.Now;
                         NotifyObserver("Item done");
                     }
                     break;
