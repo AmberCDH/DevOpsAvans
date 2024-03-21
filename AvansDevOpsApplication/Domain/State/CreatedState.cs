@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AvansDevOpsApplication.Domain.SprintState
+namespace AvansDevOpsApplication.Domain.State
 {
-    public class ActiveState : ISprintState
+    public class CreatedState : ISprintState
     {
         Sprint sprint;
-        public ActiveState(Sprint sprint) 
+        public CreatedState(Sprint sprint)
         {
             this.sprint = sprint;
         }

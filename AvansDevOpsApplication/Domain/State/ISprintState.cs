@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AvansDevOpsApplication.Domain.SprintState
+namespace AvansDevOpsApplication.Domain.State
 {
     public interface ISprintState
     {

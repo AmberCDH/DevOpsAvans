@@ -9,10 +9,10 @@ namespace AvansDevOpsApplication.Domain
         private string name;
         private string email;
         private int age;
-        private DateOnly birthday;
+        private DateTime birthday;
         private RoleType role;
 
-        public User(string name, string email, int age, DateOnly birthday, RoleType role, IObserver notificationService)
+        public User(string name, string email, int age, DateTime birthday, RoleType role, IObserver notificationService)
         {
             this.name = name;
             this.email = email;
@@ -42,7 +42,7 @@ namespace AvansDevOpsApplication.Domain
             set { age = value; }
         }
 
-        public DateOnly Birthday
+        public DateTime Birthday
         {
             get { return birthday; }
         }
