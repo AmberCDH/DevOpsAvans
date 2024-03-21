@@ -1,4 +1,4 @@
-﻿using AvansDevOpsApplication.Domain.SprintState;
+﻿using AvansDevOpsApplication.Domain.State;
 
 namespace AvansDevOpsApplication.Domain
 {
@@ -15,13 +15,13 @@ namespace AvansDevOpsApplication.Domain
         private DateTime endTime;
         private List<BacklogItem> backlogItems;
 
-        public Sprint(Guid id, string name, DateTime startTime, DateTime endTime)
+        public Sprint(string name, DateTime startTime, DateTime endTime)
         {
             backlogItems = [];
             createdState = new CreatedState(this);
             activeState = new ActiveState(this);
             state = createdState;
-            this.id = id;
+            id = Guid.NewGuid();
             this.name = name;
             this.startTime = startTime;
             this.endTime = endTime;
