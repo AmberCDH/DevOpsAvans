@@ -1,10 +1,16 @@
 ﻿using AvansDevOpsApplication.Domain;
 using AvansDevOpsApplication.Domain.Composite;
+using AvansDevOpsApplication.Domain.Factory;
 using AvansDevOpsApplication.Domain.Observer;
+
+QuestPDF.Settings.License = QuestPDF.Infrastructure.LicenseType.Community;
+
+
 
 Composite();
 GenerateBurnDownChart();
 UserRoles();
+ExportPDF();
 
 static void GenerateBurnDownChart()
 {
@@ -12,6 +18,24 @@ static void GenerateBurnDownChart()
     var sprint = new Sprint("Sprint 1", DateTime.Now, DateTime.Now.AddDays(4));
     sprint.AddBacklogItem(backlogItem);
     BurndownChart.Generate(sprint);
+}
+
+static void ExportPDF()
+{
+    var localDate = DateTime.Now;
+    var backlogItem = new BacklogItem("Als gebruiker...", "Nice description", null, localDate, "Backlog");
+    var birthday = new DateTime(2000, 1, 12);
+    var notificationService = new EmailObserver();
+    var user = new User("Tom", "t@mail.com", 24, birthday, RoleType.LEAD_DEVELOPER, notificationService);
+    var user1 = new User("Tristan", "t@mail.com", 24, birthday, RoleType.LEAD_DEVELOPER, notificationService);
+
+    List<User> users = [user, user1];
+    Report report = new Report();
+    report.createExport("pdf").exportReport("hey", "bye", users);
+    Console.WriteLine(report.createExport("png"));
+    Console.WriteLine(report.createExport(""));
+
+    Console.ReadLine();
 }
 
 static void Composite()
