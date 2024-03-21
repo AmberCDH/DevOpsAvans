@@ -1,8 +1,8 @@
 ﻿using AvansDevOpsApplication.Domain;
 using AvansDevOpsApplication.Domain.Composite;
 using AvansDevOpsApplication.Domain.Observer;
-using AvansDevOpsApplication.Domain.Factory;
 
+QuestPDF.Settings.License = QuestPDF.Infrastructure.LicenseType.Community;
 Composite();
 GenerateBurnDownChart();
 UserRoles();
