@@ -18,7 +18,7 @@
             this.time = time;
             this.backlogItem = backlogItem;
             this.name = name;
-            this.activityState = ActivityState.Todo; 
+            activityState = ActivityState.Todo; 
         }
 
         public string Comment
