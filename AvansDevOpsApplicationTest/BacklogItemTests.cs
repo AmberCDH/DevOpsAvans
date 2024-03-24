@@ -1,7 +1,5 @@
 ﻿using AvansDevOpsApplication.Domain;
 using AvansDevOpsApplication.Domain.Adapter;
-using AvansDevOpsApplication.Domain.Observer;
-using Xunit;
 
 namespace AvansDevOpsApplication.Tests
 {

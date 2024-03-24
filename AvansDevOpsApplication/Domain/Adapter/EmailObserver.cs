@@ -7,7 +7,7 @@ using AvansDevOpsApplication.Domain.Observer;
 
 namespace AvansDevOpsApplication.Domain.Adapter
 {
-    internal class EmailObserver : IObserver
+    public class EmailObserver : IObserver
     {
         public void Update(string message)
         {
