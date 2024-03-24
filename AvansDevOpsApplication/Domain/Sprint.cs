@@ -7,6 +7,9 @@ namespace AvansDevOpsApplication.Domain
     {
         ISprintState createdState;
         ISprintState activeState;
+        ISprintState finishedState;
+        ISprintState pipelineState;
+        ISprintState releasedState;
         ISprintState state;
 
         private Guid id;
@@ -20,6 +23,9 @@ namespace AvansDevOpsApplication.Domain
             backlogItems = [];
             createdState = new CreatedState(this);
             activeState = new ActiveState(this);
+            finishedState = new FinishedState(this);
+            pipelineState = new PipelineState(this);
+            releasedState = new ReleasedState(this);
             state = createdState;
             id = Guid.NewGuid();
             this.name = name;
@@ -40,6 +46,23 @@ namespace AvansDevOpsApplication.Domain
         {
             return activeState;
         }
+
+        public ISprintState GetFinishedState()
+        {
+            return finishedState;
+        }
+
+        public ISprintState GetPipelineState()
+        {
+            return pipelineState;
+        }
+
+        public ISprintState GetReleasedState()
+        {
+            return releasedState;
+        }
+
+        public ISprintState State { get { return state; } }
 
         public Guid Id
         {
