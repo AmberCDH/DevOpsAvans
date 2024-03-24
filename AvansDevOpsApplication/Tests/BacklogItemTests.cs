@@ -14,7 +14,7 @@ namespace AvansDevOpsApplication.Tests
             //Arrange
             var localDate = new DateTime(2023, 12, 25, 10, 30, 50);
             var backlogItem = new BacklogItem("Name", "Nice description", null, localDate, "Backlog");
-            var activity = new Activity("help please", "done", "not done", localDate, backlogItem, "Help");
+            var activity = new Activity("help please", localDate, backlogItem, "Help");
 
             //Act
             var before = backlogItem.toString();
@@ -31,7 +31,7 @@ namespace AvansDevOpsApplication.Tests
             //Arrange
             var localDate = new DateTime(2023, 12, 25, 10, 30, 50);
             var backlogItem = new BacklogItem("Name", "Nice description", null, localDate, "Backlog");            
-            var activity = new Activity("help please", "done", "not done", localDate, backlogItem, "Help");
+            var activity = new Activity("help please", localDate, backlogItem, "Help");
 
             //Act
             backlogItem.SetState(ItemState.Doing);
@@ -48,7 +48,7 @@ namespace AvansDevOpsApplication.Tests
             var notificationService = new EmailObserver();
             var user = new User("Tristan", "Tristan@mail.com", 60, localDate, RoleType.DEVELOPER, notificationService);
             var backlogItem = new BacklogItem("Name", "Nice description", null, localDate, "Backlog");
-            var activity = new Activity("help please", "done", "not done", localDate, backlogItem, "Help");
+            var activity = new Activity("help please", localDate, backlogItem, "Help");
 
             //Act
             backlogItem.AssignUser(user);
@@ -57,7 +57,5 @@ namespace AvansDevOpsApplication.Tests
             //Assert
             Assert.Equal(ItemState.Doing, backlogItem.ItemState);
         }
-
-
     }
 }

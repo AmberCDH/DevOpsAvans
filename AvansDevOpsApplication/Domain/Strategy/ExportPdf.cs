@@ -5,7 +5,7 @@ using QuestPDF.Previewer;
 
 namespace AvansDevOpsApplication.Domain.Strategy
 {
-    public class ExportPdf : Export
+    public class ExportPdf : IExport
     {
         public void exportReport(string header, string footer, List<User> teamInSprint)
         {

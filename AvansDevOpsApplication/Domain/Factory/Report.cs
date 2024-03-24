@@ -4,7 +4,7 @@ namespace AvansDevOpsApplication.Domain.Factory
 {
     public class Report
     {
-        public Export createExport(string format)
+        public IExport createExport(string format)
         {
             switch (format)
             {
