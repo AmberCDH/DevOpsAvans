@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AvansDevOpsApplication.Domain.State
+﻿namespace AvansDevOpsApplication.Domain.State
 {
     public class PipelineState : ISprintState
     {
+        private Sprint sprint;
+        public PipelineState (Sprint sprint)
+        {
+            this.sprint = sprint;
+        }
         public void AddBacklogItem(BacklogItem backlogItem)
         {
             throw new NotImplementedException();
