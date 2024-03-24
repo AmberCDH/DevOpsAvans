@@ -29,17 +29,7 @@ namespace AvansDevOpsApplication.Domain.Strategy
                     {
                         foreach (User user in teamInSprint)
                         {
-
-                            text.Line("");
-                            if (user.Name == "Tristan")
-                            {
-                                text.Span($"{user.Name} | {user.Role} | ");
-                                text.Element().Height(20).Width(20).Image(Placeholders.Image);
-                            }
-                            else
-                            {
-                                text.Span($"{user.Name} | {user.Role}");
-                            }
+                            text.Span($"{user.Name} | {user.Role} \n");
                         }
 
                         text.DefaultTextStyle(x => x.FontSize(20));
@@ -51,7 +41,8 @@ namespace AvansDevOpsApplication.Domain.Strategy
                     });
                 });
             })
-                .GeneratePdf("report.pdf");
+                //.GeneratePdf("report.pdf");
+                .ShowInPreviewer();
         }
     }
 }
