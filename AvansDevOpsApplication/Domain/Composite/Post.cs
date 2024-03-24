@@ -8,13 +8,12 @@
         private User user;
         private List<ForumComponent> children = new List<ForumComponent>();
 
-        public Post(string question, string description, DateTime timestamp, User user, List<ForumComponent> reactions)
+        public Post(string question, string description, DateTime timestamp, User user)
         {
             this.timestamp = timestamp;
             this.user = user;
             this.description = description;
             this.question = question;
-            this.children = reactions;
         }
 
         public override void Add(ForumComponent forumComponent)

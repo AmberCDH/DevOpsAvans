@@ -1,12 +1,12 @@
 ﻿namespace AvansDevOpsApplication.Domain.Composite
 {
-    public class Reactions : ForumComponent
+    public class Reaction : ForumComponent
     {
         private string answer;
         private DateTime timestamp;
         private User user;
 
-        public Reactions(string answer, DateTime timestamp, User user)
+        public Reaction(string answer, DateTime timestamp, User user)
         {
             this.answer = answer;
             this.timestamp = timestamp;
