@@ -2,7 +2,7 @@
 
 namespace AvansDevOpsApplication.Domain.Strategy
 {
-    public class ExportPng : Export
+    public class ExportPng : IExport
     {
         public void exportReport(string header, string footer, List<User> teamInSprint)
         {

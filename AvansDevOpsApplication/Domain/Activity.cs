@@ -4,8 +4,6 @@
     {
         private string name;
         private string comment;
-        private string movedTo;
-        private string movedFrom;
         private DateTime time;
         private BacklogItem backlogItem;
         private ActivityState activityState;
