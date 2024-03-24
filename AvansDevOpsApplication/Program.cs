@@ -1,4 +1,5 @@
 ﻿using AvansDevOpsApplication.Domain;
+using AvansDevOpsApplication.Domain.Adapter;
 using AvansDevOpsApplication.Domain.Composite;
 using AvansDevOpsApplication.Domain.Factory;
 using AvansDevOpsApplication.Domain.Observer;
