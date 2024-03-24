@@ -17,6 +17,9 @@
             this.description = description;
         }
 
+        public List<BacklogItem> BacklogItems { get { return backlogItems; } }
+        public List<Sprint> Sprints { get {  return sprints; } }
+
         public void AddBacklogItem(BacklogItem backlogItem)
         {
             backlogItems.Add(backlogItem);

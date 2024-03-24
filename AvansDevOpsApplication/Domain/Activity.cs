@@ -45,6 +45,8 @@
             return "Activity ~ Comment; " + comment + " ~ " + time;
         }
 
+        public ActivityState ActivityState { get { return activityState; } }
+
         public void SetState(ActivityState x)
         {
             switch (activityState)
