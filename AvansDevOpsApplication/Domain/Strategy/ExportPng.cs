@@ -1,5 +1,6 @@
-﻿
-namespace AvansDevOpsApplication.Domain.Factory
+﻿using AvansDevOpsApplication.Domain.Factory;
+
+namespace AvansDevOpsApplication.Domain.Strategy
 {
     public class ExportPng : Export
     {

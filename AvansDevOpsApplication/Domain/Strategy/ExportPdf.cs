@@ -1,8 +1,9 @@
-﻿using QuestPDF.Fluent;
+﻿using AvansDevOpsApplication.Domain.Factory;
+using QuestPDF.Fluent;
 using QuestPDF.Helpers;
 using QuestPDF.Previewer;
 
-namespace AvansDevOpsApplication.Domain.Factory
+namespace AvansDevOpsApplication.Domain.Strategy
 {
     public class ExportPdf : Export
     {
