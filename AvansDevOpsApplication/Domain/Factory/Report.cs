@@ -1,4 +1,6 @@
-﻿namespace AvansDevOpsApplication.Domain.Factory
+﻿using AvansDevOpsApplication.Domain.Strategy;
+
+namespace AvansDevOpsApplication.Domain.Factory
 {
     public class Report
     {
