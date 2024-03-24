@@ -49,5 +49,9 @@ jobs:
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"AmberCDH_DevOpsAvans" /o:"ambercdh" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
           dotnet build --no-incremental
-          dotnet-coverage collect "dotnet test" -f xml -o "coverage.xml"
+          coverlet .\AvansDevOpsApplication.Tests\bin\Debug\net8.0\AvansDevOpsApplication.Tests.dll
+            --target "dotnet" 
+            --targetargs "test --no-build"
+            -f=opencover 
+            -o="coverage.xml"
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"

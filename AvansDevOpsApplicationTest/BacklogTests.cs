@@ -1,6 +1,5 @@
 ﻿using AvansDevOpsApplication.Domain;
 using FluentAssertions;
-using Xunit;
 
 namespace AvansDevOpsApplication.Tests
 {
