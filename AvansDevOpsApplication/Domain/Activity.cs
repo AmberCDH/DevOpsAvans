@@ -10,11 +10,9 @@
         private BacklogItem backlogItem;
         private ActivityState activityState;
 
-        public Activity(string comment, string movedTo, string movedFrom, DateTime time, BacklogItem backlogItem, string name)
+        public Activity(string comment, DateTime time, BacklogItem backlogItem, string name)
         {
             this.comment = comment;
-            this.movedTo = movedTo;
-            this.movedFrom = movedFrom;
             this.time = time;
             this.backlogItem = backlogItem;
             this.name = name;
@@ -26,16 +24,7 @@
             get { return comment; }
             set { comment = value; }
         }
-        public string MovedTo
-        {
-            get { return movedTo; }
-            set { movedTo = value; }
-        }
-        public string MovedFrom
-        {
-            get { return movedFrom; }
-            set { movedFrom = value; }
-        }
+       
         public DateTime Time
         {
             get { return time; }
