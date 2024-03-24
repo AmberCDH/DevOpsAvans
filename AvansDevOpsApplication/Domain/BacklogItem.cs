@@ -35,6 +35,7 @@ namespace AvansDevOpsApplication.Domain
         public string InList { get => inList; set => inList = value; }
         public DateTime TimeOfCreation { get => timeOfCreation; set => timeOfCreation = value; }
         public List<Activity> Activitys { get => activitys; set => activitys = value; }
+        public List<User> AssigedUsers { get => AssigedUsers; set => assignedUsers = value; }
         public void AddActivityToList(Activity activity)
         {
             activitys.Add(activity);

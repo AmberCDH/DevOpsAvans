@@ -51,7 +51,7 @@ namespace AvansDevOpsApplication.Domain.Strategy
                     });
                 });
             })
-                .ShowInPreviewer();
+                .GeneratePdf("report.pdf");
         }
     }
 }
