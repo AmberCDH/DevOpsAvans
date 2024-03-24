@@ -47,14 +47,13 @@ static void Composite()
     var notificationService = new EmailObserver();
     var user = new User("Tom", "t@mail.com", 24, birthday, RoleType.LEAD_DEVELOPER, notificationService);
 
-    List<ForumComponent> reactionsUS1 = [new Reactions("Niemand gebruikt dit", localDate, user)];
-    List<ForumComponent> reactionsUS2 = [new Reactions("Ik ga huilen hoor", localDate, user), new Reactions("...", localDate, user)];
+    List<ForumComponent> reactionsUS1 = [new Reaction("Niemand gebruikt dit", localDate, user)];
+    List<ForumComponent> reactionsUS2 = [new Reaction("Ik ga huilen hoor", localDate, user), new Reaction("...", localDate, user)];
 
     ForumComponent FirstUserStory = new Forum(backlogItem);
-    FirstUserStory.Add(new Post("Waar is de rest van dit item?", "US is onduidelijk", localDate, user, reactionsUS1));
+    FirstUserStory.Add(new Post("Waar is de rest van dit item?", "US is onduidelijk", localDate, user));
 
-    FirstUserStory.Add(new Post("Help?", "US is onduidelijk", localDate, user, reactionsUS2));
-
+    FirstUserStory.Add(new Post("Help?", "US is onduidelijk", localDate, user));
     FirstUserStory.Print();
 }
 
