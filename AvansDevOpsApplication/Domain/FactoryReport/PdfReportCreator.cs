@@ -3,9 +3,9 @@ using QuestPDF.Fluent;
 using QuestPDF.Helpers;
 using QuestPDF.Previewer;
 
-namespace AvansDevOpsApplication.Domain.Strategy
+namespace AvansDevOpsApplication.Domain.FactoryReport
 {
-    public class ExportPdf : IExport
+    public class PdfReportCreator : IReportCreator
     {
         public void exportReport(string header, string footer, List<User> teamInSprint)
         {
@@ -42,7 +42,7 @@ namespace AvansDevOpsApplication.Domain.Strategy
                 });
             })
                 .GeneratePdf("report.pdf");
-                //.ShowInPreviewer();
+            //.ShowInPreviewer();
         }
     }
 }

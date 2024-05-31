@@ -1,6 +1,6 @@
 ﻿using AvansDevOpsApplication.Domain;
 using AvansDevOpsApplication.Domain.Factory;
-using AvansDevOpsApplication.Domain.Strategy;
+using AvansDevOpsApplication.Domain.FactoryReport;
 using FluentAssertions;
 using QuestPDF.Infrastructure;
 using System;
@@ -21,7 +21,7 @@ namespace AvansDevOpsApplication.Tests
             var header = "Report";
             List<User> users = [];
             var footer = "End of report";
-            var exportPdf = new ExportPdf();
+            var exportPdf = new PdfReportCreator();
 
             //Act
             exportPdf.exportReport(header, footer, users);
@@ -34,7 +34,7 @@ namespace AvansDevOpsApplication.Tests
             var header = "Report";
             List<User> users = [];
             var footer = "End of report";
-            var exportPng = new ExportPng();
+            var exportPng = new PngReportCreator();
 
             //Act
             exportPng.exportReport(header, footer, users);
@@ -50,7 +50,7 @@ namespace AvansDevOpsApplication.Tests
             var export = report.createExport("pdf");
 
             //Assert
-            export.Should().BeOfType<ExportPdf>();
+            export.Should().BeOfType<PdfReportCreator>();
         }
 
         [Fact]
@@ -63,7 +63,7 @@ namespace AvansDevOpsApplication.Tests
             var export = report.createExport("png");
 
             //Assert
-            export.Should().BeOfType<ExportPng>();
+            export.Should().BeOfType<PngReportCreator>();
         }
 
         [Fact]
@@ -76,7 +76,7 @@ namespace AvansDevOpsApplication.Tests
             var export = report.createExport("");
 
             //Assert
-            export.Should().BeOfType<ExportPdf>();
+            export.Should().BeOfType<PdfReportCreator>();
         }
     }
 }

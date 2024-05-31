@@ -1,24 +1,24 @@
-﻿using AvansDevOpsApplication.Domain.Strategy;
+﻿using AvansDevOpsApplication.Domain.FactoryReport;
 
 namespace AvansDevOpsApplication.Domain.Factory
 {
     public class Report
     {
-        public IExport createExport(string format)
+        public IReportCreator createExport(string format)
         {
             switch (format)
             {
                 case "pdf":
                     {
-                        return new ExportPdf();
+                        return new PdfReportCreator();
                     }
                 case "png":
                     {
-                        return new ExportPng();
+                        return new PngReportCreator();
                     }
                 default:
                     {
-                        return new ExportPdf();
+                        return new PdfReportCreator();
                     }
             }
         }
