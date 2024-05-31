@@ -1,16 +1,17 @@
 ﻿using AvansDevOpsApplication.Domain;
 using AvansDevOpsApplication.Domain.CompositeForum;
+using AvansDevOpsApplication.Domain.DecoratorBacklogExport;
 using AvansDevOpsApplication.Domain.Factory;
 using AvansDevOpsApplication.Domain.NotificationObserver;
 
 QuestPDF.Settings.License = QuestPDF.Infrastructure.LicenseType.Community;
 
 
-
-Composite();
-GenerateBurnDownChart();
-UserRoles();
-ExportPDF();
+ProjectBacklogExport();
+//Composite();
+//GenerateBurnDownChart();
+//UserRoles();
+//ExportPDF();
 
 static void GenerateBurnDownChart()
 {
@@ -67,4 +68,15 @@ static void UserRoles()
     Console.WriteLine(user.toString());
     user.Role = RoleType.SCRUM_MASTER;
     Console.WriteLine(user.toString());
+}
+
+static void ProjectBacklogExport()
+{
+    ProjectBacklogExportService exportService = new ProjectBacklogExportService();
+    var projectBacklog = new ProjectBacklog(Guid.NewGuid());
+    PDFProjectBacklogExport pdfExport = new PDFProjectBacklogExport(projectBacklog);
+    PNGProjectBacklogExport pngExport = new PNGProjectBacklogExport(projectBacklog); 
+    exportService.Export(projectBacklog);
+    exportService.Export(pdfExport);
+    exportService.Export(pngExport);
 }
