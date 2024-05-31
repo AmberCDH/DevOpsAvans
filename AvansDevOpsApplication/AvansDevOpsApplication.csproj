@@ -16,6 +16,11 @@
 	</SonarQubeSetting>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Domain\Strategy\" />
+    <Folder Include="Domain\ItemState\" />
+    <Folder Include="Domain\ActivityState\" />
+    <Folder Include="Domain\DecoratorBacklogExport\" />
+    <Folder Include="Domain\SprintState\ReviewSprint\" />
+    <Folder Include="Domain\SprintState\ReleaseSprint\" />
+    <Folder Include="Domain\StrategySprint\" />
   </ItemGroup>
 </Project>
