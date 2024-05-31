@@ -21,6 +21,5 @@
     <Folder Include="Domain\DecoratorBacklogExport\" />
     <Folder Include="Domain\SprintState\ReviewSprint\" />
     <Folder Include="Domain\SprintState\ReleaseSprint\" />
-    <Folder Include="Domain\StrategySprint\" />
   </ItemGroup>
 </Project>
