@@ -1,8 +1,7 @@
 ﻿using AvansDevOpsApplication.Domain;
-using AvansDevOpsApplication.Domain.Adapter;
-using AvansDevOpsApplication.Domain.Composite;
+using AvansDevOpsApplication.Domain.CompositeForum;
 using AvansDevOpsApplication.Domain.Factory;
-using AvansDevOpsApplication.Domain.Observer;
+using AvansDevOpsApplication.Domain.NotificationObserver;
 
 QuestPDF.Settings.License = QuestPDF.Infrastructure.LicenseType.Community;
 

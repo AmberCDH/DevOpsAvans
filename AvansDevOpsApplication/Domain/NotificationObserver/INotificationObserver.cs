@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AvansDevOpsApplication.Domain.Observer
+namespace AvansDevOpsApplication.Domain.NotificationObserver
 {
-    public interface IObserver
+    public interface INotificationObserver
     {
         void Update(string message);
     }

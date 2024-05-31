@@ -1,4 +1,4 @@
-﻿namespace AvansDevOpsApplication.Domain.Composite
+﻿namespace AvansDevOpsApplication.Domain.CompositeForum
 {
     // gebruiker kan op een forum dingen posten 
     public abstract class ForumComponent

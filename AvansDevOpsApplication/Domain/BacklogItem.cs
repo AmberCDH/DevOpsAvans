@@ -1,8 +1,8 @@
-﻿using AvansDevOpsApplication.Domain.Observer;
+﻿using AvansDevOpsApplication.Domain.NotificationObserver;
 
 namespace AvansDevOpsApplication.Domain
 {
-    public class BacklogItem : ISubject
+    public class BacklogItem : INotificationSubject
     {
         private Guid id;
         private string name;

@@ -1,10 +1,10 @@
-﻿using AvansDevOpsApplication.Domain.Observer;
+﻿using AvansDevOpsApplication.Domain.NotificationObserver;
 
 namespace AvansDevOpsApplication.Domain
 {
     public class User
     {
-        private IObserver notificationService;
+        private INotificationObserver notificationService;
         private Guid id;
         private string name;
         private string email;
@@ -12,7 +12,7 @@ namespace AvansDevOpsApplication.Domain
         private DateTime birthday;
         private RoleType role;
 
-        public User(string name, string email, int age, DateTime birthday, RoleType role, IObserver notificationService)
+        public User(string name, string email, int age, DateTime birthday, RoleType role, INotificationObserver notificationService)
         {
             this.name = name;
             this.email = email;
@@ -51,7 +51,7 @@ namespace AvansDevOpsApplication.Domain
         {
             return "User ~ Name; " + name + " ~ Age; " + age + " ~ Birthday; " + birthday + " ~ Role; " + role;
         }
-        public IObserver GetNotificationService()
+        public INotificationObserver GetNotificationService()
         {
             return notificationService;
         }

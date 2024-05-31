@@ -1,4 +1,4 @@
-﻿namespace AvansDevOpsApplication.Domain.Composite
+﻿namespace AvansDevOpsApplication.Domain.CompositeForum
 {
     public class Forum : ForumComponent
     {
