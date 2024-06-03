@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AvansDevOpsApplication.Domain.ReportTemplate;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AvansDevOpsApplication.Domain.DecoratorBacklogExport
 {
-    class ProjectBacklog : AbstractProjectBacklog
+    class ProjectBacklog : BacklogProvider
     {
         private Guid id;
         private List<BacklogItem> backlogItems = [];
@@ -18,14 +19,9 @@ namespace AvansDevOpsApplication.Domain.DecoratorBacklogExport
             backlogItems.Add(item);
         }
 
-        public override List<BacklogItem> getBacklogItems()
+        public List<BacklogItem> getBacklogItems()
         {
             return backlogItems;
-        }
-
-        public override void export()
-        {
-            Console.WriteLine("Yippie");
         }
     }
 }

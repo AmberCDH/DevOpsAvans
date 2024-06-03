@@ -3,6 +3,7 @@ using AvansDevOpsApplication.Domain.CompositeForum;
 using AvansDevOpsApplication.Domain.DecoratorBacklogExport;
 using AvansDevOpsApplication.Domain.Factory;
 using AvansDevOpsApplication.Domain.NotificationObserver;
+using AvansDevOpsApplication.Domain.ReportTemplate;
 
 QuestPDF.Settings.License = QuestPDF.Infrastructure.LicenseType.Community;
 
@@ -72,11 +73,7 @@ static void UserRoles()
 
 static void ProjectBacklogExport()
 {
-    ProjectBacklogExportService exportService = new ProjectBacklogExportService();
-    var projectBacklog = new ProjectBacklog(Guid.NewGuid());
-    PDFProjectBacklogExport pdfExport = new PDFProjectBacklogExport(projectBacklog);
-    PNGProjectBacklogExport pngExport = new PNGProjectBacklogExport(projectBacklog); 
-    exportService.Export(projectBacklog);
-    exportService.Export(pdfExport);
-    exportService.Export(pngExport);
+    BacklogProvider backlogProvider = new ProjectBacklog(Guid.NewGuid());
+    var reportTemplate = new YearReport(backlogProvider);
+    reportTemplate.GenerateReport();
 }
