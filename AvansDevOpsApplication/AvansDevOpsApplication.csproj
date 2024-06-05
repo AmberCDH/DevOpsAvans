@@ -18,7 +18,6 @@
   <ItemGroup>
     <Folder Include="Domain\ItemState\" />
     <Folder Include="Domain\ActivityState\" />
-    <Folder Include="Domain\DecoratorBacklogExport\" />
     <Folder Include="Domain\SprintState\ReviewSprint\" />
     <Folder Include="Domain\SprintState\ReleaseSprint\" />
   </ItemGroup>
