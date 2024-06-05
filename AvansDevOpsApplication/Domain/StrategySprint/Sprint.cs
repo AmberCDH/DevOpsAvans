@@ -9,6 +9,8 @@ namespace AvansDevOpsApplication.Domain.StrategySprint
         private ISprintState activeState;
         private ISprintState state;
 
+        private List<BacklogItem> backlogItemInSprint;
+
         private string name;
         private DateTime startTime;
         private DateTime endTime;
