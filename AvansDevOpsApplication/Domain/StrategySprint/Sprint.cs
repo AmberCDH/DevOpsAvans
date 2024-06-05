@@ -1,9 +1,10 @@
 ﻿
+using AvansDevOpsApplication.Domain.ReportTemplate;
 using AvansDevOpsApplication.Domain.State;
 
 namespace AvansDevOpsApplication.Domain.StrategySprint
 {
-    abstract class Sprint
+    abstract class Sprint : BacklogInterface, BacklogProvider
     {
         private ISprintState createdState;
         private ISprintState activeState;
@@ -16,13 +17,15 @@ namespace AvansDevOpsApplication.Domain.StrategySprint
         private DateTime endTime;
 
         private Guid id;
-        public Sprint()
-        {
 
+        protected Sprint(string name, DateTime startTime, DateTime endTime)
+        {
+            this.name = name;
+            this.startTime = startTime;
+            this.endTime = endTime;
+            this.backlogItemInSprint = new List<BacklogItem>();
         }
 
-        public virtual void RemoveBacklogItem(Guid id) { }
-        public virtual void AddBacklogItem(BacklogItem backlogItem) { }
         public virtual void SetState(ISprintState state) { }
 
         public virtual ISprintState GetActiveState() 
@@ -32,6 +35,31 @@ namespace AvansDevOpsApplication.Domain.StrategySprint
         public virtual ISprintState GetCreatedState() 
         {
             return this.createdState;
+        }
+
+        public BacklogItem RemoveFromBacklog(Guid id)
+        {
+            var item = backlogItemInSprint.Where(x => x.ID == id).FirstOrDefault();
+            if (item != null)
+            {
+                backlogItemInSprint.Remove(item);
+                return item;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public BacklogItem AddItemToBacklog(BacklogItem backlogItem)
+        {
+            backlogItemInSprint.Add(backlogItem);
+            return backlogItem;
+        }
+
+        public List<BacklogItem> getBacklogItems()
+        {
+            return backlogItemInSprint;
         }
     }
 }

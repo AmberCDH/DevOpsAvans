@@ -1,14 +1,14 @@
 ﻿using AvansDevOpsApplication.Domain;
 using AvansDevOpsApplication.Domain.CompositeForum;
-using AvansDevOpsApplication.Domain.DecoratorBacklogExport;
 using AvansDevOpsApplication.Domain.Factory;
 using AvansDevOpsApplication.Domain.NotificationObserver;
 using AvansDevOpsApplication.Domain.ReportTemplate;
+using AvansDevOpsApplication.Domain.StrategySprint;
 
 QuestPDF.Settings.License = QuestPDF.Infrastructure.LicenseType.Community;
 
-
-ProjectBacklogExport();
+TestBacklogIterface();
+//ProjectBacklogExport();
 //Composite();
 //GenerateBurnDownChart();
 //UserRoles();
@@ -17,9 +17,8 @@ ProjectBacklogExport();
 static void GenerateBurnDownChart()
 {
     var backlogItem = new BacklogItem("Als gebruiker...", "Nice description", null, DateTime.Now, "Backlog");
-    var sprint = new Sprint("Sprint 1", DateTime.Now, DateTime.Now.AddDays(4));
-    sprint.AddBacklogItem(backlogItem);
-    BurndownChart.Generate(sprint);
+    var sprint = new ReviewSprint("Sprint 1", DateTime.Now, DateTime.Now.AddDays(4));
+    sprint.AddItemToBacklog(backlogItem);
 }
 
 static void ExportPDF()
@@ -41,7 +40,7 @@ static void ExportPDF()
 }
 
 static void Composite()
-{   
+{
     var localDate = DateTime.Now;
     var backlogItem = new BacklogItem("Als gebruiker...", "Nice description", null, localDate, "Backlog");
     var birthday = new DateTime(2000, 1, 12);
@@ -76,4 +75,25 @@ static void ProjectBacklogExport()
     BacklogProvider backlogProvider = new ProjectBacklog(Guid.NewGuid());
     var reportTemplate = new YearReport(backlogProvider);
     reportTemplate.GenerateReport();
+}
+
+static void TestBacklogIterface()
+{
+    var projectBacklog = new ProjectBacklog(Guid.NewGuid());
+    var sprint = new ReviewSprint("", DateTime.Now, DateTime.Now);
+    BacklogInterface projectBacklogInterface = projectBacklog;
+    var item = new BacklogItem("Test", "Test", null, DateTime.Now, "1");
+    var item2 = new BacklogItem("Test2", "Test", null, DateTime.Now, "1");
+    projectBacklogInterface.AddItemToBacklog(item);
+    projectBacklogInterface.AddItemToBacklog(item2);
+    BacklogInterface sprintBacklog = sprint;
+    BacklogProvider backlogProvider = projectBacklog;
+    BacklogItemManager manager = new BacklogItemManager();
+    manager.MoveBacklogItem(projectBacklog, sprintBacklog, item);
+
+
+    Console.WriteLine(sprint.getBacklogItems().First().Name);
+    Console.WriteLine(sprint.getBacklogItems().Count());
+    manager.MoveBacklogItem(projectBacklog, sprintBacklog, item2);
+    Console.WriteLine(sprint.getBacklogItems().Count());
 }

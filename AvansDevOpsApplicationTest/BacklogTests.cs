@@ -10,7 +10,7 @@ namespace AvansDevOpsApplication.Tests
         {
             //Arrange
             var localDate = new DateTime(2023, 12, 25, 10, 30, 50);
-            var backlog = new Backlog("Alot of items", "Please send help");
+            var backlog = new BacklogInterface("Alot of items", "Please send help");
             var backlogItem = new BacklogItem("Name", "Nice description", null, localDate, "Backlog");
 
             //Act
@@ -25,7 +25,7 @@ namespace AvansDevOpsApplication.Tests
         {
             //Arrange
             var localDate = new DateTime(2023, 12, 25, 10, 30, 50);
-            var backlog = new Backlog("Alot of items", "Please send help");
+            var backlog = new BacklogInterface("Alot of items", "Please send help");
             var backlogItem = new BacklogItem("Name", "Nice description", null, localDate, "Backlog");
 
             //Act
@@ -40,7 +40,7 @@ namespace AvansDevOpsApplication.Tests
         public void ShouldAddSprint()
         {
             //Arrange
-            var backlog = new Backlog("Alot of items", "Please send help");
+            var backlog = new BacklogInterface("Alot of items", "Please send help");
             var sprint = new Sprint("First 2 weeks!", DateTime.Now, DateTime.Now.AddDays(14));
             //Act
             backlog.AddSprint(sprint);
@@ -54,7 +54,7 @@ namespace AvansDevOpsApplication.Tests
         public void ShouldRemoveSprint()
         {
             //Arrange
-            var backlog = new Backlog("Alot of items", "Please send help");
+            var backlog = new BacklogInterface("Alot of items", "Please send help");
             var sprint = new Sprint("First 2 weeks!", DateTime.Now, DateTime.Now.AddDays(14));
             //Act
             backlog.AddSprint(sprint);

@@ -29,6 +29,7 @@ namespace AvansDevOpsApplication.Domain
         }
 
         public string Name { get => name; set => name = value; }
+        public Guid ID { get => id; }
         public string Description { get => description; set => description = value; }
         public User User { get => user; set => user = value; }
         public bool WantsNotification { get => wantsNotification; set => wantsNotification = value; }
