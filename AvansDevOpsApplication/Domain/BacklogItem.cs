@@ -1,8 +1,9 @@
-﻿using AvansDevOpsApplication.Domain.Observer;
+﻿using AvansDevOpsApplication.Domain.ItemState;
+using AvansDevOpsApplication.Domain.NotificationObserver;
 
 namespace AvansDevOpsApplication.Domain
 {
-    public class BacklogItem : ISubject
+    public class BacklogItem : INotificationSubject
     {
         private Guid id;
         private string name;
@@ -15,7 +16,14 @@ namespace AvansDevOpsApplication.Domain
         private DateTime timeOfCreation;
         private DateTime timeCompleted;
         private List<User> assignedUsers = [];
-        private ItemState itemState;
+
+        private IItemState itemState;
+
+        private IItemState doingState;
+        private IItemState doneState;
+        private IItemState todoState;
+        private IItemState testingState;
+        private IItemState readyForTestingState;
 
         public BacklogItem(string name, string description, List<Activity>? activitys, DateTime timeOfCreation, string inList)
         {
@@ -25,10 +33,15 @@ namespace AvansDevOpsApplication.Domain
             this.inList = inList;
             this.activitys = activitys ?? new List<Activity>();
             this.id = Guid.NewGuid();
-            itemState = ItemState.Todo;
+            doingState = new DoingState(this);
+            doneState = new DoneState(this);
+            todoState   = new TodoState(this);
+            testingState = new TestingState(this);
+            readyForTestingState = new ReadyForTestingState(this);
         }
 
         public string Name { get => name; set => name = value; }
+        public Guid ID { get => id; }
         public string Description { get => description; set => description = value; }
         public User User { get => user; set => user = value; }
         public bool WantsNotification { get => wantsNotification; set => wantsNotification = value; }
@@ -59,32 +72,17 @@ namespace AvansDevOpsApplication.Domain
 
         public void AssignUser(User user)
         {
-            assignedUsers.Add(user);
+            itemState.AssignUser(user);
         }
 
         public void RemoveUser(User user)
         {
-            if (assignedUsers.Count <= 1)
-            {
-                if (itemState == ItemState.Todo)
-                {
-                    assignedUsers.Remove(user);
-                }
-            }
-            else
-            {
-                assignedUsers.Remove(user);
-            }
+            itemState.RemoveUser(user);
         }
 
         public Guid Id
         {
             get { return id; }
-        }
-
-        public ItemState ItemState
-        {
-            get { return itemState; }
         }
 
         public DateTime TimeCompleted
@@ -94,10 +92,15 @@ namespace AvansDevOpsApplication.Domain
             get { return effort; }
             set {  effort = value; }
         }
-
-        public void SetState(ItemState x)
+        public void ChangeState(IItemState state)
         {
-            switch (itemState)
+            state.ChangeState(state);
+        }
+
+        public void SetState(IItemState state)
+        {
+            this.itemState = state;
+          /*  switch (itemState)
             {
                 case ItemState.Todo:
                     if (x == ItemState.Doing && assignedUsers.Count > 0)
@@ -128,7 +131,36 @@ namespace AvansDevOpsApplication.Domain
                         NotifyObserver("Item done");
                     }
                     break;
-            }
+            }*/
+        }
+
+        public IItemState GetTodoState()
+        {
+            return todoState;
+        }
+
+        public IItemState GetTestingState()
+        {
+            return testingState;
+        }
+
+        public IItemState GetDoneState()
+        {
+            return doneState;
+        }
+        public IItemState GetReadyForTestingState()
+        {
+            return readyForTestingState;
+        }
+
+
+        public IItemState GetDoingState()
+        {
+            return doingState;
+        }
+        public IItemState GetState()
+        {
+            return itemState;
         }
     }
 }

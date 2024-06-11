@@ -1,6 +1,6 @@
 ﻿using AvansDevOpsApplication.Domain;
-using AvansDevOpsApplication.Domain.Adapter;
-using AvansDevOpsApplication.Domain.Composite;
+using AvansDevOpsApplication.Domain.CompositeForum;
+using AvansDevOpsApplication.Domain.NotificationObserver;
 using FluentAssertions;
 
 namespace AvansDevOpsApplication.Tests

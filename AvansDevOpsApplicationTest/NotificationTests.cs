@@ -1,5 +1,5 @@
 ﻿using AvansDevOpsApplication.Domain;
-using AvansDevOpsApplication.Domain.Adapter;
+using AvansDevOpsApplication.Domain.NotificationObserver;
 
 namespace AvansDevOpsApplication.Tests
 {

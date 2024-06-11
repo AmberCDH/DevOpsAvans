@@ -1,8 +1,6 @@
 ﻿using AvansDevOpsApplication.Domain;
-using AvansDevOpsApplication.Domain.Adapter;
+using AvansDevOpsApplication.Domain.NotificationObserver;
 using FluentAssertions;
-using System.Data;
-using System.Xml.Linq;
 
 namespace AvansDevOpsApplication.Tests
 {

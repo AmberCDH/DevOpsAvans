@@ -1,24 +1,25 @@
 ﻿using AvansDevOpsApplication.Domain;
-using AvansDevOpsApplication.Domain.Adapter;
-using AvansDevOpsApplication.Domain.Composite;
+using AvansDevOpsApplication.Domain.CompositeForum;
 using AvansDevOpsApplication.Domain.Factory;
-using AvansDevOpsApplication.Domain.Observer;
+using AvansDevOpsApplication.Domain.NotificationObserver;
+using AvansDevOpsApplication.Domain.ReportTemplate;
+using AvansDevOpsApplication.Domain.StrategySprint;
 
 QuestPDF.Settings.License = QuestPDF.Infrastructure.LicenseType.Community;
 
-
-
-Composite();
-GenerateBurnDownChart();
-UserRoles();
-ExportPDF();
+TestStrategySprint();
+//TestBacklogIterface();
+//ProjectBacklogExport();
+//Composite();
+//GenerateBurnDownChart();
+//UserRoles();
+//ExportPDF();
 
 static void GenerateBurnDownChart()
 {
     var backlogItem = new BacklogItem("Als gebruiker...", "Nice description", null, DateTime.Now, "Backlog");
-    var sprint = new Sprint("Sprint 1", DateTime.Now, DateTime.Now.AddDays(4));
-    sprint.AddBacklogItem(backlogItem);
-    BurndownChart.Generate(sprint);
+    var sprint = new ReviewSprint("Sprint 1", DateTime.Now, DateTime.Now.AddDays(4));
+    sprint.AddItemToBacklog(backlogItem);
 }
 
 static void ExportPDF()
@@ -40,7 +41,7 @@ static void ExportPDF()
 }
 
 static void Composite()
-{   
+{
     var localDate = DateTime.Now;
     var backlogItem = new BacklogItem("Als gebruiker...", "Nice description", null, localDate, "Backlog");
     var birthday = new DateTime(2000, 1, 12);
@@ -68,4 +69,47 @@ static void UserRoles()
     Console.WriteLine(user.toString());
     user.Role = RoleType.SCRUM_MASTER;
     Console.WriteLine(user.toString());
+}
+
+static void ProjectBacklogExport()
+{
+    Project project = new Project("Bende van ellende");
+    var backlog = project.GetProjectBacklog();
+    var item = new BacklogItem("Pray", "Praying for a good grade", null, DateTime.Now, "1");
+    var item2 = new BacklogItem("Test", "Test", null, DateTime.Now, "1");
+    backlog.AddItemToBacklog(item);
+    backlog.AddItemToBacklog(item2);
+    var reportTemplate = new YearReport(project.GetProjectBacklog());
+    reportTemplate.GenerateReport();
+}
+
+static void TestBacklogIterface()
+{
+    var projectBacklog = new ProjectBacklog(Guid.NewGuid());
+    var sprint = new ReviewSprint("", DateTime.Now, DateTime.Now);
+    BacklogInterface projectBacklogInterface = projectBacklog;
+    var item = new BacklogItem("Test", "Test", null, DateTime.Now, "1");
+    var item2 = new BacklogItem("Test2", "Test", null, DateTime.Now, "1");
+    projectBacklogInterface.AddItemToBacklog(item);
+    projectBacklogInterface.AddItemToBacklog(item2);
+    BacklogInterface sprintBacklog = sprint;
+    BacklogProvider backlogProvider = projectBacklog;
+    BacklogItemManager manager = new BacklogItemManager();
+    manager.MoveBacklogItem(projectBacklog, sprintBacklog, item);
+
+
+    Console.WriteLine(sprint.getBacklogItems().First().Name);
+    Console.WriteLine(sprint.getBacklogItems().Count());
+    manager.MoveBacklogItem(projectBacklog, sprintBacklog, item2);
+    Console.WriteLine(sprint.getBacklogItems().Count());
+}
+
+static void TestStrategySprint()
+{
+    var releaseSprint = new ReleaseSprint("Test", DateTime.Now, DateTime.Now);
+    releaseSprint.SetState(releaseSprint.GetActiveState());
+    releaseSprint.AddItemToBacklog(new BacklogItem("Test", "Test", null, DateTime.Now, "1"));
+    Console.WriteLine(releaseSprint.getBacklogItems().First().Name);
+    releaseSprint.SetState(releaseSprint.GetFinishedState());
+    releaseSprint.AddItemToBacklog(new BacklogItem("Test", "Test", null, DateTime.Now, "1"));
 }

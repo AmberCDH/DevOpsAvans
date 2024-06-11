@@ -1,4 +1,6 @@
-﻿using AvansDevOpsApplication.Domain.Models;
+﻿using AvansDevOpsApplication.Domain.ItemState;
+using AvansDevOpsApplication.Domain.Models;
+using AvansDevOpsApplication.Domain.StrategySprint;
 
 namespace AvansDevOpsApplication.Domain
 {
@@ -19,7 +21,7 @@ namespace AvansDevOpsApplication.Domain
             List<CompletedBacklogItem> completedBacklogItems = new List<CompletedBacklogItem>();
             foreach (var item in items)
             {
-                if (item.ItemState == ItemState.Done)
+                if (item.GetState() == item.GetDoneState())
                 {
                     CompletedBacklogItem completedItem = new CompletedBacklogItem { timeCompleted = item.TimeCompleted, name = item.Name, effort = item.Effort };
                     completedBacklogItems.Add(completedItem);
@@ -32,8 +34,8 @@ namespace AvansDevOpsApplication.Domain
         {
             Console.WriteLine("Burndown Chart:");
 
-            var total = TotalEffort(sprint.BacklogItems);
-            var completedItems = CompletedItems(sprint.BacklogItems);
+            var total = TotalEffort(sprint.getBacklogItems());
+            var completedItems = CompletedItems(sprint.getBacklogItems());
 
             for (int i = total; i >= 0; i--)
             {
