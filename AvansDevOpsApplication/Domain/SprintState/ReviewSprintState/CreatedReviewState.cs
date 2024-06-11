@@ -12,12 +12,12 @@ namespace AvansDevOpsApplication.Domain.SprintState.ReviewSprintState
 
         public void AddBacklogItem(BacklogItem backlogItem)
         {
-            sprint.AddItemToBacklog(backlogItem);
+            throw new NotImplementedException();
         }
 
         public void RemoveBacklogItem(Guid id)
         {
-            sprint.RemoveFromBacklog(id);
+            throw new NotImplementedException();
         }
     }
 }
