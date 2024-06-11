@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AvansDevOpsApplication.Domain.ReportTemplate
 {
-    interface BacklogProvider
+    public interface BacklogProvider
     {
         List<BacklogItem> getBacklogItems();
     }

@@ -7,8 +7,8 @@ using AvansDevOpsApplication.Domain.StrategySprint;
 
 QuestPDF.Settings.License = QuestPDF.Infrastructure.LicenseType.Community;
 
-TestBacklogIterface();
-//ProjectBacklogExport();
+//TestBacklogIterface();
+ProjectBacklogExport();
 //Composite();
 //GenerateBurnDownChart();
 //UserRoles();
@@ -72,8 +72,13 @@ static void UserRoles()
 
 static void ProjectBacklogExport()
 {
-    BacklogProvider backlogProvider = new ProjectBacklog(Guid.NewGuid());
-    var reportTemplate = new YearReport(backlogProvider);
+    Project project = new Project("Bende van ellende");
+    var backlog = project.GetProjectBacklog();
+    var item = new BacklogItem("Pray", "Praying for a good grade", null, DateTime.Now, "1");
+    var item2 = new BacklogItem("Test", "Test", null, DateTime.Now, "1");
+    backlog.AddItemToBacklog(item);
+    backlog.AddItemToBacklog(item2);
+    var reportTemplate = new YearReport(project.GetProjectBacklog());
     reportTemplate.GenerateReport();
 }
 

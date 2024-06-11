@@ -18,7 +18,7 @@ namespace AvansDevOpsApplication.Domain.StrategySprint
 
         private Guid id;
 
-        protected Sprint(string name, DateTime startTime, DateTime endTime)
+        public Sprint(string name, DateTime startTime, DateTime endTime)
         {
             this.name = name;
             this.startTime = startTime;

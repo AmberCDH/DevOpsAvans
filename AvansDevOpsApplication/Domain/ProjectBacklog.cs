@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AvansDevOpsApplication.Domain
 {
-    class ProjectBacklog : BacklogProvider, BacklogInterface
+    public class ProjectBacklog : BacklogProvider, BacklogInterface
     {
         private Guid id;
         private List<BacklogItem> backlogItems = [];
@@ -15,8 +15,6 @@ namespace AvansDevOpsApplication.Domain
         public ProjectBacklog(Guid id)
         {
             this.id = id;
-            //var item = new BacklogItem("Test", "Test", null, DateTime.Now, "1");
-            //backlogItems.Add(item);
         }
 
         public BacklogItem AddItemToBacklog(BacklogItem backlogItem)
@@ -32,7 +30,7 @@ namespace AvansDevOpsApplication.Domain
 
         public BacklogItem RemoveFromBacklog(Guid id)
         {
-            var item = backlogItems.Where(x => x.ID == id).FirstOrDefault();
+            var item = backlogItems.Where(x => x.Id == id).FirstOrDefault();
             if (item != null)
             {
                 backlogItems.Remove(item);
