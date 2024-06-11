@@ -20,7 +20,6 @@
 	</SonarQubeSetting>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Domain\ItemState\" />
     <Folder Include="Domain\ActivityState\" />
   </ItemGroup>
 </Project>
