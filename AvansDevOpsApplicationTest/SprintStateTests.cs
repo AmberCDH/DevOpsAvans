@@ -1,5 +1,5 @@
 ﻿using AvansDevOpsApplication.Domain;
-using AvansDevOpsApplication.Domain.State;
+using AvansDevOpsApplication.Domain.SprintState.ReleaseSprintState;
 using FluentAssertions;
 
 namespace AvansDevOpsApplication.Tests
@@ -34,7 +34,7 @@ namespace AvansDevOpsApplication.Tests
 
 
             //Assert
-            sprint.State.Should().BeOfType<CreatedState>();
+            sprint.State.Should().BeOfType<CreatedReleaseState>();
         }
         [Fact]
         public void ShouldSetStateFinished()
@@ -49,7 +49,7 @@ namespace AvansDevOpsApplication.Tests
 
 
             //Assert
-            sprint.State.Should().BeOfType<FinishedState>();
+            sprint.State.Should().BeOfType<FinishedReviewState>();
         }
         [Fact]
         public void ShouldSetStatePipeline()
@@ -64,7 +64,7 @@ namespace AvansDevOpsApplication.Tests
 
 
             //Assert
-            sprint.State.Should().BeOfType<PipelineState>();
+            sprint.State.Should().BeOfType<PipelineReviewState>();
         }
         [Fact]
         public void ShouldSetStateReleased()
@@ -79,7 +79,7 @@ namespace AvansDevOpsApplication.Tests
 
 
             //Assert
-            sprint.State.Should().BeOfType<ReleasedState>();
+            sprint.State.Should().BeOfType<ReviewState>();
         }
     }
 }

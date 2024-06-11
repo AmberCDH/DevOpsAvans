@@ -7,8 +7,9 @@ using AvansDevOpsApplication.Domain.StrategySprint;
 
 QuestPDF.Settings.License = QuestPDF.Infrastructure.LicenseType.Community;
 
+TestStrategySprint();
 //TestBacklogIterface();
-ProjectBacklogExport();
+//ProjectBacklogExport();
 //Composite();
 //GenerateBurnDownChart();
 //UserRoles();
@@ -101,4 +102,14 @@ static void TestBacklogIterface()
     Console.WriteLine(sprint.getBacklogItems().Count());
     manager.MoveBacklogItem(projectBacklog, sprintBacklog, item2);
     Console.WriteLine(sprint.getBacklogItems().Count());
+}
+
+static void TestStrategySprint()
+{
+    var releaseSprint = new ReleaseSprint("Test", DateTime.Now, DateTime.Now);
+    releaseSprint.SetState(releaseSprint.GetActiveState());
+    releaseSprint.AddItemToBacklog(new BacklogItem("Test", "Test", null, DateTime.Now, "1"));
+    Console.WriteLine(releaseSprint.getBacklogItems().First().Name);
+    releaseSprint.SetState(releaseSprint.GetFinishedState());
+    releaseSprint.AddItemToBacklog(new BacklogItem("Test", "Test", null, DateTime.Now, "1"));
 }

@@ -8,7 +8,7 @@ namespace AvansDevOpsApplication.Domain
 {
     public interface BacklogInterface
     {
-        public BacklogItem RemoveFromBacklog(Guid id);
-        public BacklogItem AddItemToBacklog(BacklogItem backlogItem);
+        public void RemoveFromBacklog(Guid id);
+        public void AddItemToBacklog(BacklogItem backlogItem);
     }
 }

@@ -1,9 +1,11 @@
-﻿namespace AvansDevOpsApplication.Domain.State
+﻿using AvansDevOpsApplication.Domain.StrategySprint;
+
+namespace AvansDevOpsApplication.Domain.SprintState.ReviewSprintState
 {
-    public class ReleasedState : ISprintState
+    public class ReviewState : ISprintState
     {
-        private Sprint sprint;
-        public ReleasedState(Sprint sprint)
+        private ReviewSprint sprint;
+        public ReviewState(ReviewSprint sprint)
         {
             this.sprint = sprint;
         }

@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Domain\Sprint.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="QuestPDF" Version="2023.12.6" />
   </ItemGroup>
   <ItemGroup>
@@ -18,7 +22,5 @@
   <ItemGroup>
     <Folder Include="Domain\ItemState\" />
     <Folder Include="Domain\ActivityState\" />
-    <Folder Include="Domain\SprintState\ReviewSprint\" />
-    <Folder Include="Domain\SprintState\ReleaseSprint\" />
   </ItemGroup>
 </Project>

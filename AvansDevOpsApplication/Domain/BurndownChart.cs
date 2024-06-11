@@ -1,4 +1,5 @@
 ﻿using AvansDevOpsApplication.Domain.Models;
+using AvansDevOpsApplication.Domain.StrategySprint;
 
 namespace AvansDevOpsApplication.Domain
 {
@@ -32,8 +33,8 @@ namespace AvansDevOpsApplication.Domain
         {
             Console.WriteLine("Burndown Chart:");
 
-            var total = TotalEffort(sprint.BacklogItems);
-            var completedItems = CompletedItems(sprint.BacklogItems);
+            var total = TotalEffort(sprint.getBacklogItems());
+            var completedItems = CompletedItems(sprint.getBacklogItems());
 
             for (int i = total; i >= 0; i--)
             {

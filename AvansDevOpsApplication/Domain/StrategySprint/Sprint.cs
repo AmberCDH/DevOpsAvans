@@ -1,22 +1,17 @@
 ﻿
 using AvansDevOpsApplication.Domain.ReportTemplate;
-using AvansDevOpsApplication.Domain.State;
+using AvansDevOpsApplication.Domain.SprintState;
 
 namespace AvansDevOpsApplication.Domain.StrategySprint
 {
-    abstract class Sprint : BacklogInterface, BacklogProvider
+    public abstract class Sprint : BacklogInterface, BacklogProvider
     {
-        private ISprintState createdState;
-        private ISprintState activeState;
-        private ISprintState state;
-
         private List<BacklogItem> backlogItemInSprint;
-
         private string name;
         private DateTime startTime;
         private DateTime endTime;
-
         private Guid id;
+        private ISprintState state;
 
         public Sprint(string name, DateTime startTime, DateTime endTime)
         {
@@ -26,20 +21,14 @@ namespace AvansDevOpsApplication.Domain.StrategySprint
             this.backlogItemInSprint = new List<BacklogItem>();
         }
 
-        public virtual void SetState(ISprintState state) { }
-
-        public virtual ISprintState GetActiveState() 
-        {
-            return this.state;
-        }
-        public virtual ISprintState GetCreatedState() 
-        {
-            return this.createdState;
+        public virtual void SetState(ISprintState state) {
+            this.state = state;
         }
 
-        public BacklogItem RemoveFromBacklog(Guid id)
+        public void RemoveFromBacklog(Guid id)
         {
-            var item = backlogItemInSprint.Where(x => x.ID == id).FirstOrDefault();
+            state.RemoveBacklogItem(id);
+           /* var item = backlogItemInSprint.Where(x => x.ID == id).FirstOrDefault();
             if (item != null)
             {
                 backlogItemInSprint.Remove(item);
@@ -48,13 +37,12 @@ namespace AvansDevOpsApplication.Domain.StrategySprint
             else
             {
                 return null;
-            }
+            }*/
         }
 
-        public BacklogItem AddItemToBacklog(BacklogItem backlogItem)
+        public void AddItemToBacklog(BacklogItem backlogItem)
         {
-            backlogItemInSprint.Add(backlogItem);
-            return backlogItem;
+           state.AddBacklogItem(backlogItem);
         }
 
         public List<BacklogItem> getBacklogItems()

@@ -17,10 +17,9 @@ namespace AvansDevOpsApplication.Domain
             this.id = id;
         }
 
-        public BacklogItem AddItemToBacklog(BacklogItem backlogItem)
+        public void AddItemToBacklog(BacklogItem backlogItem)
         {
             backlogItems.Add(backlogItem);
-            return backlogItem;
         }
 
         public List<BacklogItem> getBacklogItems()
@@ -28,19 +27,13 @@ namespace AvansDevOpsApplication.Domain
             return backlogItems;
         }
 
-        public BacklogItem RemoveFromBacklog(Guid id)
+        public void RemoveFromBacklog(Guid id)
         {
             var item = backlogItems.Where(x => x.Id == id).FirstOrDefault();
             if (item != null)
             {
                 backlogItems.Remove(item);
-                return item;
             }
-            else
-            {
-                return null;
-            }
-
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace AvansDevOpsApplication.Domain.State
+﻿namespace AvansDevOpsApplication.Domain.SprintState
 {
     public interface ISprintState
     {

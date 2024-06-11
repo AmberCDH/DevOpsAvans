@@ -1,12 +1,15 @@
-﻿namespace AvansDevOpsApplication.Domain.State
+﻿using AvansDevOpsApplication.Domain.StrategySprint;
+
+namespace AvansDevOpsApplication.Domain.SprintState.ReviewSprintState
 {
-    public class PipelineState : ISprintState
+    public class FinishedReviewState : ISprintState
     {
-        private Sprint sprint;
-        public PipelineState (Sprint sprint)
+        private ReviewSprint sprint;
+        public FinishedReviewState(ReviewSprint sprint)
         {
             this.sprint = sprint;
         }
+
         public void AddBacklogItem(BacklogItem backlogItem)
         {
             throw new NotImplementedException();
