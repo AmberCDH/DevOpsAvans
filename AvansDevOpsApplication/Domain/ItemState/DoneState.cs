@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AvansDevOpsApplication.Domain.ItemState
+﻿namespace AvansDevOpsApplication.Domain.ItemState
 {
     public class DoneState : IItemState
     {

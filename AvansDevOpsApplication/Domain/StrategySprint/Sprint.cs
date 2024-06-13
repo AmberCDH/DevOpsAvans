@@ -1,5 +1,4 @@
-﻿
-using AvansDevOpsApplication.Domain.ReportTemplate;
+﻿using AvansDevOpsApplication.Domain.ReportTemplate;
 using AvansDevOpsApplication.Domain.SprintState;
 
 namespace AvansDevOpsApplication.Domain.StrategySprint
@@ -28,16 +27,6 @@ namespace AvansDevOpsApplication.Domain.StrategySprint
         public void RemoveFromBacklog(Guid id)
         {
             state.RemoveBacklogItem(id);
-           /* var item = backlogItemInSprint.Where(x => x.ID == id).FirstOrDefault();
-            if (item != null)
-            {
-                backlogItemInSprint.Remove(item);
-                return item;
-            }
-            else
-            {
-                return null;
-            }*/
         }
 
         public void AddItemToBacklog(BacklogItem backlogItem)
