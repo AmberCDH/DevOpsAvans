@@ -5,6 +5,7 @@
         LEAD_DEVELOPER,
         SCRUM_MASTER,
         DEVELOPER,
-        PRODUCT_OWNER
+        PRODUCT_OWNER,
+        TESTER
     }
 }

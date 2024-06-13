@@ -16,17 +16,17 @@ namespace AvansDevOpsApplication.Domain.ItemState
 
         public void AssignUser(User user)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Can't assign users in done state");
         }
 
         public void ChangeState(IItemState state)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Can't change state");
         }
 
         public void RemoveUser(User user)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Can't remove users in done state");
         }
     }
 }

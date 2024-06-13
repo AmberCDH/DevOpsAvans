@@ -7,7 +7,8 @@ using AvansDevOpsApplication.Domain.StrategySprint;
 
 QuestPDF.Settings.License = QuestPDF.Infrastructure.LicenseType.Community;
 
-TestStrategySprint();
+TestBacklogItemState();
+//TestStrategySprint();
 //TestBacklogIterface();
 //ProjectBacklogExport();
 //Composite();
@@ -112,4 +113,25 @@ static void TestStrategySprint()
     Console.WriteLine(releaseSprint.getBacklogItems().First().Name);
     releaseSprint.SetState(releaseSprint.GetFinishedState());
     releaseSprint.AddItemToBacklog(new BacklogItem("Test", "Test", null, DateTime.Now, "1"));
+}
+
+static void TestBacklogItemState()
+{
+    var backlogItem = new BacklogItem("Test", "Test", null, DateTime.Now, "1");
+    var notificationService = new EmailObserver();
+    var user = new User("Test", "test", 5, DateTime.Now, RoleType.LEAD_DEVELOPER, notificationService);
+    var testUser = new User("Test", "test", 5, DateTime.Now, RoleType.TESTER, notificationService);
+    backlogItem.AssignUser(user);
+    backlogItem.ChangeState(backlogItem.GetDoingState());
+    backlogItem.RemoveUser(user);
+    backlogItem.ChangeState(backlogItem.GetReadyForTestingState());
+    backlogItem.AssignUser(user);
+    backlogItem.ChangeState(backlogItem.GetTestingState());
+    backlogItem.AssignUser(testUser);
+    backlogItem.ChangeState(backlogItem.GetTestingState());
+    backlogItem.RemoveUser(testUser);
+    //backlogItem.ChangeState(backlogItem.GetTodoState());
+    //backlogItem.ChangeState(backlogItem.GetDoingState());
+    backlogItem.ChangeState(backlogItem.GetDoneState());
+    backlogItem.ChangeState(backlogItem.GetTodoState());
 }

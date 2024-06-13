@@ -33,11 +33,13 @@ namespace AvansDevOpsApplication.Domain
             this.inList = inList;
             this.activitys = activitys ?? new List<Activity>();
             this.id = Guid.NewGuid();
+ 
             doingState = new DoingState(this);
             doneState = new DoneState(this);
             todoState   = new TodoState(this);
             testingState = new TestingState(this);
             readyForTestingState = new ReadyForTestingState(this);
+            this.itemState = todoState;
         }
 
         public string Name { get => name; set => name = value; }
@@ -94,7 +96,7 @@ namespace AvansDevOpsApplication.Domain
         }
         public void ChangeState(IItemState state)
         {
-            state.ChangeState(state);
+            itemState.ChangeState(state);
         }
 
         public void SetState(IItemState state)

@@ -10,17 +10,20 @@
 
         public void AssignUser(User user)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Can't assign users when item has doing state");
         }
 
         public void ChangeState(IItemState state)
         {
-            throw new NotImplementedException();
+            if (state == backlogItem.GetReadyForTestingState())
+            {
+                backlogItem.SetState(state);
+            }
         }
 
         public void RemoveUser(User user)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Can't remove users when item has doing state");
         }
     }
 }
