@@ -1,4 +1,5 @@
 ﻿using AvansDevOpsApplication.Domain;
+using AvansDevOpsApplication.Domain.ActivityState;
 using AvansDevOpsApplication.Domain.CompositeForum;
 using AvansDevOpsApplication.Domain.Factory;
 using AvansDevOpsApplication.Domain.NotificationObserver;
@@ -6,8 +7,8 @@ using AvansDevOpsApplication.Domain.ReportTemplate;
 using AvansDevOpsApplication.Domain.StrategySprint;
 
 QuestPDF.Settings.License = QuestPDF.Infrastructure.LicenseType.Community;
-
-TestBacklogItemState();
+TestActivityState();
+//TestBacklogItemState();
 //TestStrategySprint();
 //TestBacklogIterface();
 //ProjectBacklogExport();
@@ -134,4 +135,16 @@ static void TestBacklogItemState()
     //backlogItem.ChangeState(backlogItem.GetDoingState());
     backlogItem.ChangeState(backlogItem.GetDoneState());
     backlogItem.ChangeState(backlogItem.GetTodoState());
+}
+
+static void TestActivityState()
+{
+    var activity = new Activity("Doe maar iets maken ofzo", "Mooie activity");
+    Console.WriteLine(activity.getState().ToString());
+    activity.ChangeState(new ToDoActivityState(activity));
+    Console.WriteLine(activity.getState().ToString());
+    activity.ChangeState(new DoneActivityState(activity));
+    Console.WriteLine(activity.getState().ToString());
+    activity.ChangeState(new DoneActivityState(activity));
+    Console.WriteLine(activity.getState().ToString());
 }
