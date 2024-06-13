@@ -7,8 +7,8 @@ using AvansDevOpsApplication.Domain.ReportTemplate;
 using AvansDevOpsApplication.Domain.StrategySprint;
 
 QuestPDF.Settings.License = QuestPDF.Infrastructure.LicenseType.Community;
-TestActivityState();
-//TestBacklogItemState();
+//TestActivityState();
+TestBacklogItemState();
 //TestStrategySprint();
 //TestBacklogIterface();
 //ProjectBacklogExport();
@@ -118,7 +118,12 @@ static void TestStrategySprint()
 
 static void TestBacklogItemState()
 {
-    var backlogItem = new BacklogItem("Test", "Test", null, DateTime.Now, "1");
+    var activity = new Activity("Doe maar iets maken ofzo", "Mooie activity");
+    var activity2 = new Activity("Maak iets vreemds in de code", "Nieuwe activity");
+    var activitys = new List<Activity>();
+    activitys.Add(activity);
+    activitys.Add(activity2);
+    var backlogItem = new BacklogItem("Test", "Test", activitys, DateTime.Now, "1");
     var notificationService = new EmailObserver();
     var user = new User("Test", "test", 5, DateTime.Now, RoleType.LEAD_DEVELOPER, notificationService);
     var testUser = new User("Test", "test", 5, DateTime.Now, RoleType.TESTER, notificationService);
@@ -133,6 +138,9 @@ static void TestBacklogItemState()
     backlogItem.RemoveUser(testUser);
     //backlogItem.ChangeState(backlogItem.GetTodoState());
     //backlogItem.ChangeState(backlogItem.GetDoingState());
+    backlogItem.ChangeState(backlogItem.GetDoneState());
+    activity.SetState(new DoneActivityState(activity));
+    activity2.SetState(new DoneActivityState(activity2));
     backlogItem.ChangeState(backlogItem.GetDoneState());
     backlogItem.ChangeState(backlogItem.GetTodoState());
 }
