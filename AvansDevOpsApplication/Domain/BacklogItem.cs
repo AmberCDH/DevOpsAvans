@@ -102,38 +102,6 @@ namespace AvansDevOpsApplication.Domain
         public void SetState(IItemState state)
         {
             this.itemState = state;
-          /*  switch (itemState)
-            {
-                case ItemState.Todo:
-                    if (x == ItemState.Doing && assignedUsers.Count > 0)
-                    {
-                        itemState = x;
-                        NotifyObserver("Item in progress");
-                    }
-                    break;
-
-                case ItemState.Doing:
-                    if (x == ItemState.Testing)
-                    {
-                        itemState = x;
-                        NotifyObserver("Item ready for testing");
-                    }
-                    break;
-
-                case ItemState.Testing:
-                    if (x == ItemState.Doing)
-                    {
-                        itemState = x;
-                        NotifyObserver("Testfindings");
-                    }
-                    if (x == ItemState.Done)
-                    {
-                        itemState = x;
-                        timeCompleted = DateTime.Now;
-                        NotifyObserver("Item done");
-                    }
-                    break;
-            }*/
         }
 
         public IItemState GetTodoState()
