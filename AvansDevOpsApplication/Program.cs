@@ -7,8 +7,9 @@ using AvansDevOpsApplication.Domain.ReportTemplate;
 using AvansDevOpsApplication.Domain.StrategySprint;
 
 QuestPDF.Settings.License = QuestPDF.Infrastructure.LicenseType.Community;
+TestReviewSprint();
 //TestActivityState();
-TestBacklogItemState();
+//TestBacklogItemState();
 //TestStrategySprint();
 //TestBacklogIterface();
 //ProjectBacklogExport();
@@ -155,4 +156,29 @@ static void TestActivityState()
     Console.WriteLine(activity.getState().ToString());
     activity.ChangeState(new DoneActivityState(activity));
     Console.WriteLine(activity.getState().ToString());
+}
+
+static void TestReviewSprint(){
+    var projectBacklog = new ProjectBacklog(Guid.NewGuid());
+    var sprint = new ReviewSprint("", DateTime.Now, DateTime.Now);
+    BacklogInterface projectBacklogInterface = projectBacklog;
+    BacklogProvider projectBacklogProvider = projectBacklog;
+
+    BacklogProvider biProvider = sprint;
+    BacklogInterface biInterface = sprint;
+
+    var item = new BacklogItem("Test", "Test", null, DateTime.Now, "1");
+    var item2 = new BacklogItem("Test2", "Test", null, DateTime.Now, "1");
+    projectBacklogInterface.AddItemToBacklog(item);
+    projectBacklogInterface.AddItemToBacklog(item2);
+
+    BacklogItemManager manager = new BacklogItemManager();
+
+
+    manager.MoveBacklogItem(projectBacklog, sprint, item);
+    
+    Console.WriteLine(sprint.getBacklogItems().First().Name);
+    Console.WriteLine(sprint.getBacklogItems().Count());
+    manager.MoveBacklogItem(projectBacklog, sprint, item);
+    Console.WriteLine(sprint.getBacklogItems().Count());
 }

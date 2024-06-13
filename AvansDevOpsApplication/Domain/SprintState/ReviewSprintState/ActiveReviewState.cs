@@ -1,23 +1,24 @@
 ﻿using AvansDevOpsApplication.Domain.StrategySprint;
 
-namespace AvansDevOpsApplication.Domain.SprintState.ReleaseSprintState
+namespace AvansDevOpsApplication.Domain.SprintState.ReviewSprintState
 {
     public class ActiveReviewState : ISprintState
     {
-        private ReleaseSprint sprint;
-        public ActiveReviewState(ReleaseSprint sprint)
+        private ReviewSprint sprint;
+        public ActiveReviewState(ReviewSprint sprint)
         {
             this.sprint = sprint;
         }
 
         public void AddBacklogItem(BacklogItem backlogItem)
         {
-            throw new NotImplementedException();
+            sprint.getBacklogItems().Add(backlogItem);
         }
 
         public void RemoveBacklogItem(Guid id)
         {
-            throw new NotImplementedException();
+            var x = sprint.getBacklogItems().Where(x => x.Id == id).SingleOrDefault();
+            sprint.getBacklogItems().Remove(x);
         }
     }
 }

@@ -12,9 +12,13 @@ namespace AvansDevOpsApplication.Domain.StrategySprint
         private Guid id;
         private ISprintState state;
 
+        public DateTime StartTime { get => startTime; set => startTime = value; }
+        public DateTime EndTime { get => endTime; set => endTime = value; }
+        public string Name { get => name; private set => name = value; }
+
         public Sprint(string name, DateTime startTime, DateTime endTime)
         {
-            this.name = name;
+            this.Name = name;
             this.startTime = startTime;
             this.endTime = endTime;
             this.backlogItemInSprint = new List<BacklogItem>();
