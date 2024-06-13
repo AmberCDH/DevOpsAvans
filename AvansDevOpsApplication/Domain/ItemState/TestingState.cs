@@ -26,7 +26,7 @@ namespace AvansDevOpsApplication.Domain.ItemState
                 backlogItem.AssigedUsers = [];
                 backlogItem.SetState(state);
             }
-            else if (state == backlogItem.GetDoneState())
+            else if (state == backlogItem.GetDoneState() && backlogItem.activitysDone())
             {
                 backlogItem.SetState(state);
             }

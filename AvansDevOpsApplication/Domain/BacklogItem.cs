@@ -1,4 +1,5 @@
-﻿using AvansDevOpsApplication.Domain.ItemState;
+﻿using AvansDevOpsApplication.Domain.ActivityState;
+using AvansDevOpsApplication.Domain.ItemState;
 using AvansDevOpsApplication.Domain.NotificationObserver;
 
 namespace AvansDevOpsApplication.Domain
@@ -131,6 +132,18 @@ namespace AvansDevOpsApplication.Domain
         public IItemState GetState()
         {
             return itemState;
+        }
+
+        public bool activitysDone()
+        {
+            foreach(Activity a in activitys)
+            {
+                if (a.getState().GetType() != new DoneActivityState(a).GetType())
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }
