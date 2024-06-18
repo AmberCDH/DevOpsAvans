@@ -2,10 +2,10 @@
 
 namespace AvansDevOpsApplication.Domain.SprintState.ReviewSprintState
 {
-    public class ActiveReleaseState : ISprintState
+    public class CancelReviewState : ISprintState
     {
-        private ReleaseSprint sprint;
-        public ActiveReleaseState(ReleaseSprint sprint)
+        private ReviewSprint sprint;
+        public CancelReviewState(ReviewSprint sprint)
         {
             this.sprint = sprint;
         }

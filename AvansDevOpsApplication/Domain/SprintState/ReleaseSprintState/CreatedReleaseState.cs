@@ -20,7 +20,5 @@ namespace AvansDevOpsApplication.Domain.SprintState.ReleaseSprintState
         {
             sprint.getBacklogItems().Add(backlogItem);
         }
-
-        //set name en begin and end date
     }
 }
