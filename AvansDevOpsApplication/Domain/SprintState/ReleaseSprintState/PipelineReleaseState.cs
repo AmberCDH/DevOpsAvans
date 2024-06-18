@@ -11,12 +11,12 @@ namespace AvansDevOpsApplication.Domain.SprintState.ReleaseSprintState
         }
         public void AddBacklogItem(BacklogItem backlogItem)
         {
-            Console.WriteLine("Sprint is released");
+            Console.WriteLine("Sprint is in pipeline state. Cannot add backlogitems");
         }
 
         public void RemoveBacklogItem(Guid id)
         {
-            Console.WriteLine("Sprint is released");
+            Console.WriteLine("Sprint is in pipeline state. Cannot remove backlogitems");
         }
     }
 }

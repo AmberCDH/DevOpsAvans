@@ -21,6 +21,7 @@ namespace AvansDevOpsApplication.Domain.SprintState.ReviewSprintState
             sprint.getBacklogItems().Remove(x);
         }
 
+        //set name en begin and end date
         public void SetName(string name)
         {
             throw new NotImplementedException();
