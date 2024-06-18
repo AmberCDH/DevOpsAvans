@@ -4,10 +4,12 @@ using AvansDevOpsApplication.Domain.CompositeForum;
 using AvansDevOpsApplication.Domain.Factory;
 using AvansDevOpsApplication.Domain.NotificationObserver;
 using AvansDevOpsApplication.Domain.ReportTemplate;
+using AvansDevOpsApplication.Domain.SprintState.ReviewSprintState;
 using AvansDevOpsApplication.Domain.StrategySprint;
 
 QuestPDF.Settings.License = QuestPDF.Infrastructure.LicenseType.Community;
-TestReviewSprint();
+TestSprintSetNameWhenCreated();
+//TestReviewSprint();
 //TestActivityState();
 //TestBacklogItemState();
 //TestStrategySprint();
@@ -181,4 +183,27 @@ static void TestReviewSprint(){
     Console.WriteLine(sprint.getBacklogItems().Count());
     manager.MoveBacklogItem(projectBacklog, sprint, item);
     Console.WriteLine(sprint.getBacklogItems().Count());
+}
+
+static void TestSprintSetNameWhenCreated()
+{
+    var sprint = new ReviewSprint("groen", DateTime.Now, DateTime.Now);
+    Console.WriteLine(sprint.Name);
+    Console.WriteLine(sprint.StartTime);
+    Console.WriteLine(sprint.EndTime);
+    sprint.SetName("Blauw");
+    sprint.SetStartTime(new DateTime(1995, 1, 1));
+    sprint.SetEndTime(new DateTime(1995, 1, 1));
+    Console.WriteLine(sprint.Name);
+    Console.WriteLine(sprint.StartTime);
+    Console.WriteLine(sprint.EndTime);
+    sprint.SetState(new CancelReviewState(sprint));
+    sprint.SetName("Send help");
+    sprint.SetStartTime(DateTime.Now);
+    sprint.SetEndTime(DateTime.Now);
+    Console.WriteLine(sprint.Name);
+    Console.WriteLine(sprint.StartTime);
+    Console.WriteLine(sprint.EndTime);
+    var item = new BacklogItem("Test", "Test", null, DateTime.Now, "1");
+    sprint.AddItemToBacklog(item);
 }

@@ -138,7 +138,7 @@ namespace AvansDevOpsApplication.Domain
         {
             foreach(Activity a in activitys)
             {
-                if (a.getState().GetType() != new DoneActivityState(a).GetType())
+                if (a.getState().GetType() != typeof(DoneActivityState))
                 {
                     return false;
                 }

@@ -11,12 +11,12 @@ namespace AvansDevOpsApplication.Domain.SprintState.ReviewSprintState
         }
         public void AddBacklogItem(BacklogItem backlogItem)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Sprint is in pipeline state. Cannot add backlogitems");
         }
 
         public void RemoveBacklogItem(Guid id)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Sprint is in pipeline state. Cannot remove backlogitems");
         }
     }
 }

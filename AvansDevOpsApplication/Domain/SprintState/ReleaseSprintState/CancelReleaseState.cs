@@ -11,12 +11,12 @@ namespace AvansDevOpsApplication.Domain.SprintState.ReleaseSprintState
         }
         public void AddBacklogItem(BacklogItem backlogItem)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Sprint release is canceled");
         }
 
         public void RemoveBacklogItem(Guid id)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Sprint release is canceled");
         }
     }
 }

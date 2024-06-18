@@ -1,5 +1,7 @@
 ﻿using AvansDevOpsApplication.Domain.ReportTemplate;
 using AvansDevOpsApplication.Domain.SprintState;
+using AvansDevOpsApplication.Domain.SprintState.ReleaseSprintState;
+using AvansDevOpsApplication.Domain.SprintState.ReviewSprintState;
 
 namespace AvansDevOpsApplication.Domain.StrategySprint
 {
@@ -41,6 +43,28 @@ namespace AvansDevOpsApplication.Domain.StrategySprint
         public List<BacklogItem> getBacklogItems()
         {
             return backlogItemInSprint;
+        }
+
+        public void SetName(string name)
+        {
+            if (state.GetType() == typeof(CreatedReleaseState) || state.GetType() == typeof(CreatedReviewState))
+            {
+                Name = name;
+            }
+        }
+        public void SetEndTime(DateTime endTime)
+        {
+            if (state.GetType() == typeof(CreatedReleaseState) || state.GetType() == typeof(CreatedReviewState))
+            {
+                EndTime = endTime;
+            }
+        }
+        public void SetStartTime(DateTime startTime)
+        {
+            if (state.GetType() == typeof(CreatedReleaseState) || state.GetType() == typeof(CreatedReviewState))
+            {
+                StartTime = startTime;
+            }
         }
     }
 }
