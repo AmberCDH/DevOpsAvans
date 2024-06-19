@@ -68,5 +68,44 @@ namespace AvansDevOpsApplication.Tests
             //Assert
             sprint.GetState().Should().BeOfType<PipelineReviewState>();
         }
+
+        [Fact]
+        public void ShouldAddBacklogItemInActiveState()
+        {
+            //Arrange
+            var startDate = new DateTime(2023, 12, 25);
+            var endDate = DateTime.Now;
+            var sprint = new ReviewSprint("Mayonaise wiki", startDate, endDate);
+            var item = new BacklogItem("Update dutch mayonaise brands", "Update dutch brand entries with more information", null, DateTime.Now);
+
+            //Act
+            sprint.SetState(sprint.GetActiveState());
+            sprint.AddItemToBacklog(item);
+
+
+            //Assert
+            sprint.GetActiveState().Should().BeOfType<ActiveReviewState>();
+            sprint.getBacklogItems().Should().HaveCount(1);
+        }
+
+        [Fact]
+        public void ShouldRemoveBacklogItemInActiveState()
+        {
+            //Arrange
+            var startDate = new DateTime(2023, 12, 25);
+            var endDate = DateTime.Now;
+            var sprint = new ReviewSprint("Mayonaise wiki", startDate, endDate);
+            var item = new BacklogItem("Update dutch mayonaise brands", "Update dutch brand entries with more information", null, DateTime.Now);
+
+            //Act
+            sprint.AddItemToBacklog(item);
+            sprint.SetState(sprint.GetActiveState());
+            sprint.RemoveFromBacklog(item.ID);
+
+
+            //Assert
+            sprint.GetActiveState().Should().BeOfType<ActiveReviewState>();
+            sprint.getBacklogItems().Should().HaveCount(0);
+        }
     }
 }
