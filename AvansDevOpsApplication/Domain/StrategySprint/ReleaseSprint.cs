@@ -12,7 +12,7 @@ namespace AvansDevOpsApplication.Domain.StrategySprint
         {
             activeState = new ActiveReleaseState(this);
             createdState = new CreatedReleaseState(this);
-            finishedState = new FinishedReleaseState(this);
+            finishedState = new FinishedReleaseState();
             base.SetState(createdState);
         }
 

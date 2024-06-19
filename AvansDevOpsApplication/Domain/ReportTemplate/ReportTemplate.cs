@@ -2,13 +2,6 @@
 {
     abstract class ReportTemplate
     {
-        private BacklogProvider backlogProvider;
-
-        public ReportTemplate(BacklogProvider backlogProvider)
-        {
-            this.backlogProvider = backlogProvider;
-        }
-
         public void GenerateReport()
         {
             var backlogItems = FilterBacklogItems();

@@ -142,8 +142,8 @@ static void TestBacklogItemState()
     //backlogItem.ChangeState(backlogItem.GetTodoState());
     //backlogItem.ChangeState(backlogItem.GetDoingState());
     backlogItem.ChangeState(backlogItem.GetDoneState());
-    activity.SetState(new DoneActivityState(activity));
-    activity2.SetState(new DoneActivityState(activity2));
+    activity.SetState(new DoneActivityState());
+    activity2.SetState(new DoneActivityState());
     backlogItem.ChangeState(backlogItem.GetDoneState());
     backlogItem.ChangeState(backlogItem.GetTodoState());
 }
@@ -154,9 +154,9 @@ static void TestActivityState()
     Console.WriteLine(activity.getState().ToString());
     activity.ChangeState(new ToDoActivityState(activity));
     Console.WriteLine(activity.getState().ToString());
-    activity.ChangeState(new DoneActivityState(activity));
+    activity.ChangeState(new DoneActivityState());
     Console.WriteLine(activity.getState().ToString());
-    activity.ChangeState(new DoneActivityState(activity));
+    activity.ChangeState(new DoneActivityState());
     Console.WriteLine(activity.getState().ToString());
 }
 
@@ -197,7 +197,7 @@ static void TestSprintSetNameWhenCreated()
     Console.WriteLine(sprint.Name);
     Console.WriteLine(sprint.StartTime);
     Console.WriteLine(sprint.EndTime);
-    sprint.SetState(new CancelReviewState(sprint));
+    sprint.SetState(new CancelReviewState());
     sprint.SetName("Send help");
     sprint.SetStartTime(DateTime.Now);
     sprint.SetEndTime(DateTime.Now);

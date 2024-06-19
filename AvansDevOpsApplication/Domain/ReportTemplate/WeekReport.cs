@@ -3,7 +3,7 @@
     internal class WeekReport : ReportTemplate
     {
         private BacklogProvider backlogProvider;
-        public WeekReport(BacklogProvider backlogProvider) : base(backlogProvider)
+        public WeekReport(BacklogProvider backlogProvider)
         {
             this.backlogProvider = backlogProvider;
         }
