@@ -94,6 +94,7 @@ namespace AvansDevOpsApplication.Domain
         }
         public void ChangeState(IItemState state)
         {
+            NotifyObserver(name + " changed state");
             itemState.ChangeState(state);
         }
 

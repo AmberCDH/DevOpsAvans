@@ -1,4 +1,5 @@
 ﻿using AvansDevOpsApplication.Domain;
+using AvansDevOpsApplication.Domain.ItemState;
 using AvansDevOpsApplication.Domain.NotificationObserver;
 using FluentAssertions;
 
@@ -43,6 +44,52 @@ namespace AvansDevOpsApplication.Tests
 
             //Assert
             backlogItem.Activitys.Should().HaveCount(1);  
+        }
+
+        [Fact]
+        public void ShouldNotAssignUserInDoneState()
+        {
+            //Arrange
+            var backlogItem = new BacklogItem("Turtle shop", "Backlog for the turtle shop project", null, DateTime.Now);
+            var user = new User("Tristan", "Tristan@mail.com", DateTime.Now, RoleType.DEVELOPER, new EmailObserver());
+
+            //Act
+            backlogItem.SetState(backlogItem.GetDoneState());
+            backlogItem.AssignUser(user);
+
+            //Assert
+            backlogItem.AssigedUsers.Should().HaveCount(0);
+        }
+
+        [Fact]
+        public void ShouldNotRemoveUserInDoneState()
+        {
+            //Arrange
+            var backlogItem = new BacklogItem("Turtle shop", "Backlog for the turtle shop project", null, DateTime.Now);
+            var user = new User("Tristan", "Tristan@mail.com", DateTime.Now, RoleType.DEVELOPER, new EmailObserver());
+
+            //Act
+            backlogItem.AssignUser(user);
+            backlogItem.SetState(backlogItem.GetDoneState());
+            backlogItem.RemoveUser(user);
+
+            //Assert
+            backlogItem.AssigedUsers.Should().HaveCount(1);
+        }
+
+
+        [Fact]
+        public void ShouldNotChangeStateInDoneState()
+        {
+            //Arrange
+            var backlogItem = new BacklogItem("Turtle shop", "Backlog for the turtle shop project", null, DateTime.Now);
+
+            //Act
+            backlogItem.SetState(backlogItem.GetDoneState());
+            backlogItem.ChangeState(backlogItem.GetTodoState());
+
+            //Assert
+            backlogItem.GetState().Should().Be(backlogItem.GetDoneState());
         }
 
         [Fact]

@@ -107,5 +107,84 @@ namespace AvansDevOpsApplication.Tests.SprintTests
             sprint.GetActiveState().Should().BeOfType<ActiveReviewState>();
             sprint.getBacklogItems().Should().HaveCount(0);
         }
+
+
+        [Fact]
+        public void ShouldNotRemoveItemInReviewCancelState()
+        {
+            //Arrange
+            var startDate = new DateTime(2023, 12, 25);
+            var endDate = DateTime.Now;
+            var sprint = new ReviewSprint("Mayonaise wiki", startDate, endDate);
+            var item = new BacklogItem("Update dutch mayonaise brands", "Update dutch brand entries with more information", null, DateTime.Now);
+
+            //Act
+            sprint.AddItemToBacklog(item);
+            sprint.SetState(sprint.GetCancelState());
+            sprint.RemoveFromBacklog(item.ID);
+
+
+            //Assert
+            sprint.GetState().Should().BeOfType<CancelReviewState>();
+            sprint.getBacklogItems().Should().HaveCount(1);
+        }
+
+        [Fact]
+        public void ShouldNotAddItemInReviewCancelState()
+        {
+            //Arrange
+            var startDate = new DateTime(2023, 12, 25);
+            var endDate = DateTime.Now;
+            var sprint = new ReviewSprint("Mayonaise wiki", startDate, endDate);
+            var item = new BacklogItem("Update dutch mayonaise brands", "Update dutch brand entries with more information", null, DateTime.Now);
+
+            //Act
+            sprint.SetState(sprint.GetCancelState());
+            sprint.AddItemToBacklog(item);
+
+
+            //Assert
+            sprint.GetState().Should().BeOfType<CancelReviewState>();
+            sprint.getBacklogItems().Should().HaveCount(0);
+        }
+
+        [Fact]
+        public void ShouldNotRemoveItemInReviewFinishedState()
+        {
+            //Arrange
+            var startDate = new DateTime(2023, 12, 25);
+            var endDate = DateTime.Now;
+            var sprint = new ReviewSprint("Mayonaise wiki", startDate, endDate);
+            var item = new BacklogItem("Update dutch mayonaise brands", "Update dutch brand entries with more information", null, DateTime.Now);
+
+            //Act
+            sprint.AddItemToBacklog(item);
+            sprint.SetState(sprint.GetFinishedState());
+            sprint.RemoveFromBacklog(item.ID);
+
+
+            //Assert
+            sprint.GetState().Should().BeOfType<FinishedReviewState>();
+            sprint.getBacklogItems().Should().HaveCount(1);
+        }
+
+        [Fact]
+        public void ShouldNotAddItemInReviewFinishedState()
+        {
+            //Arrange
+            var startDate = new DateTime(2023, 12, 25);
+            var endDate = DateTime.Now;
+            var sprint = new ReviewSprint("Mayonaise wiki", startDate, endDate);
+            var item = new BacklogItem("Update dutch mayonaise brands", "Update dutch brand entries with more information", null, DateTime.Now);
+
+            //Act
+            sprint.SetState(sprint.GetFinishedState());
+            sprint.AddItemToBacklog(item);
+
+
+            //Assert
+            sprint.GetState().Should().BeOfType<FinishedReviewState>();
+            sprint.getBacklogItems().Should().HaveCount(0);
+        }
     }
 }

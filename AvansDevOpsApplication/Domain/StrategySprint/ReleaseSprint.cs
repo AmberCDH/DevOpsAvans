@@ -8,11 +8,13 @@ namespace AvansDevOpsApplication.Domain.StrategySprint
         private readonly ISprintState createdState;
         private readonly ISprintState activeState;
         private readonly ISprintState finishedState;
+        private readonly ISprintState cancelState;
         public ReleaseSprint(string name, DateTime startTime, DateTime endTime) : base(name, startTime, endTime)
         {
             activeState = new ActiveReleaseState(this);
             createdState = new CreatedReleaseState(this);
             finishedState = new FinishedReleaseState();
+            cancelState = new CancelReleaseState();
             base.SetState(createdState);
         }
 
@@ -29,6 +31,11 @@ namespace AvansDevOpsApplication.Domain.StrategySprint
         public ISprintState GetFinishedState()
         {
             return finishedState;
+        }
+
+        public ISprintState GetCancelState()
+        {
+            return cancelState;
         }
     }
 }
