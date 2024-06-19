@@ -10,6 +10,7 @@ namespace AvansDevOpsApplication.Domain.StrategySprint
         private readonly ISprintState finishedState;
         private readonly ISprintState pipelineState;
         private readonly ISprintState cancelState;
+        private readonly ISprintState reviewState;
         public ReviewSprint(string name, DateTime startTime, DateTime endTime) : base(name, startTime, endTime)
         {
             activeState = new ActiveReviewState(this);
@@ -17,6 +18,7 @@ namespace AvansDevOpsApplication.Domain.StrategySprint
             pipelineState = new PipelineReviewState();
             finishedState = new FinishedReviewState();
             cancelState = new CancelReviewState();
+            reviewState = new ReviewState();
             base.SetState(createdState);
         }
 
@@ -43,6 +45,11 @@ namespace AvansDevOpsApplication.Domain.StrategySprint
         public ISprintState GetCancelState()
         {
             return cancelState;
+        }
+
+        public ISprintState GetReviewState()
+        {
+            return reviewState;
         }
     }
 }

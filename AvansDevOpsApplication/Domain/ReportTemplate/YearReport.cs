@@ -1,6 +1,6 @@
 ﻿namespace AvansDevOpsApplication.Domain.ReportTemplate
 {
-    internal class YearReport : ReportTemplate
+    public class YearReport : ReportTemplate
     {
         private BacklogProvider backlogProvider;
         public YearReport(BacklogProvider backlogProvider)

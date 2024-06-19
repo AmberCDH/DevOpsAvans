@@ -2,7 +2,7 @@
 
 namespace AvansDevOpsApplication.Domain.SprintState.ReleaseSprintState
 {
-    public class ReleaseState : ISprintState
+    public class ReleasedState : ISprintState
     {
         public void AddBacklogItem(BacklogItem backlogItem)
         {

@@ -161,5 +161,71 @@ namespace AvansDevOpsApplication.Tests
             var backlogItem = new BacklogItem("Name", "Backlog for the turtle shop project", null, DateTime.Now);
             var activity = new Activity("help please", "");
         }
+
+        [Fact]
+        public void ShouldAssignUserInReadyForTestingStateIfRoleIsTester()
+        {
+            //Arrange
+            var notificationService = new EmailObserver();
+            var user = new User("Tristan", "Tristan@mail.com", DateTime.Now, RoleType.TESTER, notificationService);
+            var backlogItem = new BacklogItem("Name", "Backlog for the turtle shop project", null, DateTime.Now);
+
+            //Act
+            backlogItem.SetState(backlogItem.GetReadyForTestingState());
+            backlogItem.AssignUser(user);
+
+            //Assert
+            backlogItem.AssigedUsers.Should().Contain(user);
+        }
+
+        [Fact]
+        public void ShouldNotAssignUserInReadyForTestingStateIfRoleIsNotTester()
+        {
+            //Arrange
+            var notificationService = new EmailObserver();
+            var user = new User("Tristan", "Tristan@mail.com", DateTime.Now, RoleType.DEVELOPER, notificationService);
+            var backlogItem = new BacklogItem("Name", "Backlog for the turtle shop project", null, DateTime.Now);
+
+            //Act
+            backlogItem.SetState(backlogItem.GetReadyForTestingState());
+            backlogItem.AssignUser(user);
+
+            //Assert
+            backlogItem.AssigedUsers.Should().NotContain(user);
+        }
+
+        [Fact]
+        public void ShouldChangeStateToTestingIfAssignedTester()
+        {
+            //Arrange
+            var notificationService = new EmailObserver();
+            var user = new User("Tristan", "Tristan@mail.com", DateTime.Now, RoleType.TESTER, notificationService);
+            var backlogItem = new BacklogItem("Name", "Backlog for the turtle shop project", null, DateTime.Now);
+
+            //Act
+            backlogItem.SetState(backlogItem.GetReadyForTestingState());
+            backlogItem.AssignUser(user);
+            backlogItem.ChangeState(backlogItem.GetTestingState());
+
+            //Assert
+            backlogItem.GetState().Should().Be(backlogItem.GetTestingState());
+        }
+
+        [Fact]
+        public void ShouldNotChangeStateToTestingIfNoAssignedTester()
+        {
+            //Arrange
+            var notificationService = new EmailObserver();
+            var user = new User("Tristan", "Tristan@mail.com", DateTime.Now, RoleType.DEVELOPER, notificationService);
+            var backlogItem = new BacklogItem("Name", "Backlog for the turtle shop project", null, DateTime.Now);
+
+            //Act
+            backlogItem.SetState(backlogItem.GetReadyForTestingState());
+            backlogItem.AssignUser(user);
+            backlogItem.ChangeState(backlogItem.GetTestingState());
+
+            //Assert
+            backlogItem.GetState().Should().Be(backlogItem.GetReadyForTestingState());
+        }
     }
 }

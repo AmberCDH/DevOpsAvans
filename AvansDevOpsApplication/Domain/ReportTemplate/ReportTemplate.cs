@@ -1,6 +1,6 @@
 ﻿namespace AvansDevOpsApplication.Domain.ReportTemplate
 {
-    abstract class ReportTemplate
+    public abstract class ReportTemplate
     {
         public void GenerateReport()
         {

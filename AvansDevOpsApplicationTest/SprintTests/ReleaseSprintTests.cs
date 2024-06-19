@@ -170,5 +170,83 @@ namespace AvansDevOpsApplication.Tests.SprintTests
             sprint.GetState().Should().BeOfType<FinishedReleaseState>();
             sprint.getBacklogItems().Should().HaveCount(0);
         }
+
+        [Fact]
+        public void ShouldNotAddItemInReleasePipelineState()
+        {
+            //Arrange
+            var startDate = new DateTime(2023, 12, 25);
+            var endDate = DateTime.Now;
+            var sprint = new ReleaseSprint("Mayonaise wiki", startDate, endDate);
+            var item = new BacklogItem("Update dutch mayonaise brands", "Update dutch brand entries with more information", null, DateTime.Now);
+
+            //Act
+            sprint.SetState(sprint.GetPipelineState());
+            sprint.AddItemToBacklog(item);
+
+
+            //Assert
+            sprint.GetState().Should().BeOfType<PipelineReleaseState>();
+            sprint.getBacklogItems().Should().HaveCount(0);
+        }
+
+        [Fact]
+        public void ShouldNotRemoveItemInReleasePipelineState()
+        {
+            //Arrange
+            var startDate = new DateTime(2023, 12, 25);
+            var endDate = DateTime.Now;
+            var sprint = new ReleaseSprint("Mayonaise wiki", startDate, endDate);
+            var item = new BacklogItem("Update dutch mayonaise brands", "Update dutch brand entries with more information", null, DateTime.Now);
+
+            //Act
+            sprint.AddItemToBacklog(item);
+            sprint.SetState(sprint.GetPipelineState());
+            sprint.RemoveFromBacklog(item.ID);
+
+
+            //Assert
+            sprint.GetState().Should().BeOfType<PipelineReleaseState>();
+            sprint.getBacklogItems().Should().HaveCount(1);
+        }
+
+        [Fact]
+        public void ShouldNotAddItemInReleaseReleaseState()
+        {
+            //Arrange
+            var startDate = new DateTime(2023, 12, 25);
+            var endDate = DateTime.Now;
+            var sprint = new ReleaseSprint("Mayonaise wiki", startDate, endDate);
+            var item = new BacklogItem("Update dutch mayonaise brands", "Update dutch brand entries with more information", null, DateTime.Now);
+
+            //Act
+            sprint.SetState(sprint.GetReleasedState());
+            sprint.AddItemToBacklog(item);
+
+
+            //Assert
+            sprint.GetState().Should().BeOfType<ReleasedState>();
+            sprint.getBacklogItems().Should().HaveCount(0);
+        }
+
+        [Fact]
+        public void ShouldNotRemoveItemInReleaseReleaseState()
+        {
+            //Arrange
+            var startDate = new DateTime(2023, 12, 25);
+            var endDate = DateTime.Now;
+            var sprint = new ReleaseSprint("Mayonaise wiki", startDate, endDate);
+            var item = new BacklogItem("Update dutch mayonaise brands", "Update dutch brand entries with more information", null, DateTime.Now);
+
+            //Act
+            sprint.AddItemToBacklog(item);
+            sprint.SetState(sprint.GetReleasedState());
+            sprint.RemoveFromBacklog(item.ID);
+
+
+            //Assert
+            sprint.GetState().Should().BeOfType<ReleasedState>();
+            sprint.getBacklogItems().Should().HaveCount(1);
+        }
     }
 }

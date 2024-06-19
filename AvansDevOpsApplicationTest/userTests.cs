@@ -20,6 +20,7 @@ namespace AvansDevOpsApplication.Tests
             //Assert
             user.Role.Should().Be(RoleType.LEAD_DEVELOPER);
         }
+
         [Fact]
         public void ShouldChangeNameOfUser()
         {

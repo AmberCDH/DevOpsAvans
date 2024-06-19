@@ -1,6 +1,6 @@
 ﻿namespace AvansDevOpsApplication.Domain.ReportTemplate
 {
-    internal class WeekReport : ReportTemplate
+    public class WeekReport : ReportTemplate
     {
         private BacklogProvider backlogProvider;
         public WeekReport(BacklogProvider backlogProvider)
@@ -17,7 +17,7 @@
         {
             foreach (var item in backlogItems)
             {
-                Console.WriteLine("~Backlog item: "+item.Name+", ~User that worked on it: "+ item.User.Name);
+                Console.WriteLine("~Backlog item: "+item.Name);
             }
         }
 
