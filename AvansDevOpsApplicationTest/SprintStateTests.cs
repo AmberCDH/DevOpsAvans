@@ -36,7 +36,7 @@ namespace AvansDevOpsApplication.Tests
 
 
             //Assert
-            sprint.GetActiveState().Should().BeOfType<CreatedReviewState>();
+            sprint.GetState().Should().BeOfType<CreatedReviewState>();
         }
         [Fact]
         public void ShouldSetStateFinished()
@@ -51,7 +51,7 @@ namespace AvansDevOpsApplication.Tests
 
 
             //Assert
-            sprint.GetActiveState().Should().BeOfType<FinishedReviewState>();
+            sprint.GetState().Should().BeOfType<FinishedReviewState>();
         }
         [Fact]
         public void ShouldSetStatePipeline()
@@ -66,7 +66,7 @@ namespace AvansDevOpsApplication.Tests
 
 
             //Assert
-            sprint.GetActiveState().Should().BeOfType<PipelineReviewState>();
+            sprint.GetState().Should().BeOfType<PipelineReviewState>();
         }
     }
 }

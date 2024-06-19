@@ -7,11 +7,21 @@ namespace AvansDevOpsApplication.Tests
     public class BacklogItemTests
     {
         [Fact]
+        public void ShouldCreateBacklogItem()
+        {
+            //Arrange
+            var backlogItem = new BacklogItem("Turtle shop", "Backlog for the turtle shop project", null, DateTime.Now);
+
+            //Assert
+            backlogItem.GetState().Should().NotBeNull();
+        }
+
+        [Fact]
         public void ShouldAddActivityToList()
         {
             //Arrange
             var backlogItem = new BacklogItem("Turtle shop", "Backlog for the turtle shop project", null, DateTime.Now);
-            var activity = new Activity("Clean up unused imports in web project","unused imports");
+            var activity = new Activity("Clean up unused imports in web project", "unused imports");
 
             //Act
             var before = backlogItem.toString();
