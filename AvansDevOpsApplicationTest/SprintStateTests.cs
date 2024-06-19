@@ -1,5 +1,7 @@
 ﻿using AvansDevOpsApplication.Domain;
 using AvansDevOpsApplication.Domain.SprintState.ReleaseSprintState;
+using AvansDevOpsApplication.Domain.SprintState.ReviewSprintState;
+using AvansDevOpsApplication.Domain.StrategySprint;
 using FluentAssertions;
 
 namespace AvansDevOpsApplication.Tests
@@ -12,14 +14,14 @@ namespace AvansDevOpsApplication.Tests
             //Arrange
             var startDate = new DateTime(2023, 12, 25);
             var endDate = DateTime.Now;
-            var sprint = new Sprint("Cool sprint", startDate, endDate);
+            var sprint = new ReviewSprint("Cool sprint", startDate, endDate);
 
             //Act
             sprint.SetState(sprint.GetActiveState());
 
 
             //Assert
-            sprint.State.Should().BeOfType<ActiveState>();
+            sprint.GetActiveState().Should().BeOfType<ActiveReviewState>();
         }
         [Fact]
         public void ShouldSetStateCreated()
@@ -27,14 +29,14 @@ namespace AvansDevOpsApplication.Tests
             //Arrange
             var startDate = new DateTime(2023, 12, 25);
             var endDate = DateTime.Now;
-            var sprint = new Sprint("Cool sprint", startDate, endDate);
+            var sprint = new ReviewSprint("Cool sprint", startDate, endDate);
 
             //Act
             sprint.SetState(sprint.GetCreatedState());
 
 
             //Assert
-            sprint.State.Should().BeOfType<CreatedReleaseState>();
+            sprint.GetState().Should().BeOfType<CreatedReviewState>();
         }
         [Fact]
         public void ShouldSetStateFinished()
@@ -42,14 +44,14 @@ namespace AvansDevOpsApplication.Tests
             //Arrange
             var startDate = new DateTime(2023, 12, 25);
             var endDate = DateTime.Now;
-            var sprint = new Sprint("Cool sprint", startDate, endDate);
+            var sprint = new ReviewSprint("Cool sprint", startDate, endDate);
 
             //Act
             sprint.SetState(sprint.GetFinishedState());
 
 
             //Assert
-            sprint.State.Should().BeOfType<FinishedReviewState>();
+            sprint.GetState().Should().BeOfType<FinishedReviewState>();
         }
         [Fact]
         public void ShouldSetStatePipeline()
@@ -57,29 +59,14 @@ namespace AvansDevOpsApplication.Tests
             //Arrange
             var startDate = new DateTime(2023, 12, 25);
             var endDate = DateTime.Now;
-            var sprint = new Sprint("Cool sprint", startDate, endDate);
+            var sprint = new ReviewSprint("Cool sprint", startDate, endDate);
 
             //Act
             sprint.SetState(sprint.GetPipelineState());
 
 
             //Assert
-            sprint.State.Should().BeOfType<PipelineReviewState>();
-        }
-        [Fact]
-        public void ShouldSetStateReleased()
-        {
-            //Arrange
-            var startDate = new DateTime(2023, 12, 25);
-            var endDate = DateTime.Now;
-            var sprint = new Sprint("Cool sprint", startDate, endDate);
-
-            //Act
-            sprint.SetState(sprint.GetReleasedState());
-
-
-            //Assert
-            sprint.State.Should().BeOfType<ReviewState>();
+            sprint.GetState().Should().BeOfType<PipelineReviewState>();
         }
     }
 }

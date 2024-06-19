@@ -22,7 +22,7 @@ QuestPDF.Settings.License = QuestPDF.Infrastructure.LicenseType.Community;
 
 static void GenerateBurnDownChart()
 {
-    var backlogItem = new BacklogItem("Als gebruiker...", "Nice description", null, DateTime.Now, "Backlog");
+    var backlogItem = new BacklogItem("Als gebruiker...", "Nice description", null, DateTime.Now);
     var sprint = new ReviewSprint("Sprint 1", DateTime.Now, DateTime.Now.AddDays(4));
     sprint.AddItemToBacklog(backlogItem);
 }
@@ -30,11 +30,11 @@ static void GenerateBurnDownChart()
 static void ExportPDF()
 {
     var localDate = DateTime.Now;
-    var backlogItem = new BacklogItem("Als gebruiker...", "Nice description", null, localDate, "Backlog");
+    var backlogItem = new BacklogItem("Als gebruiker...", "Nice description", null, localDate);
     var birthday = new DateTime(2000, 1, 12);
     var notificationService = new EmailObserver();
-    var user = new User("Tom", "t@mail.com", 24, birthday, RoleType.LEAD_DEVELOPER, notificationService);
-    var user1 = new User("Tristan", "t@mail.com", 24, birthday, RoleType.LEAD_DEVELOPER, notificationService);
+    var user = new User("Tom", "t@mail.com", birthday, RoleType.LEAD_DEVELOPER, notificationService);
+    var user1 = new User("Tristan", "t@mail.com", birthday, RoleType.LEAD_DEVELOPER, notificationService);
 
     List<User> users = [user, user1];
     Report report = new Report();
@@ -48,10 +48,10 @@ static void ExportPDF()
 static void Composite()
 {
     var localDate = DateTime.Now;
-    var backlogItem = new BacklogItem("Als gebruiker...", "Nice description", null, localDate, "Backlog");
+    var backlogItem = new BacklogItem("Als gebruiker...", "Nice description", null, localDate);
     var birthday = new DateTime(2000, 1, 12);
     var notificationService = new EmailObserver();
-    var user = new User("Tom", "t@mail.com", 24, birthday, RoleType.LEAD_DEVELOPER, notificationService);
+    var user = new User("Tom", "t@mail.com", birthday, RoleType.LEAD_DEVELOPER, notificationService);
 
     List<ForumComponent> reactionsUS1 = [new Reaction("Niemand gebruikt dit", localDate, user)];
     List<ForumComponent> reactionsUS2 = [new Reaction("Ik ga huilen hoor", localDate, user), new Reaction("...", localDate, user)];
@@ -67,7 +67,7 @@ static void UserRoles()
 {
     var birthday = new DateTime(2000, 1, 12);
     var notificationService = new EmailObserver();
-    var user = new User("Tom", "t@mail.com", 24, birthday, RoleType.LEAD_DEVELOPER, notificationService);
+    var user = new User("Tom", "t@mail.com", birthday, RoleType.LEAD_DEVELOPER, notificationService);
 
     Console.WriteLine(user.toString());
     user.Name = "Test";
@@ -80,8 +80,8 @@ static void ProjectBacklogExport()
 {
     Project project = new Project("Bende van ellende");
     var backlog = project.GetProjectBacklog();
-    var item = new BacklogItem("Pray", "Praying for a good grade", null, DateTime.Now, "1");
-    var item2 = new BacklogItem("Test", "Test", null, DateTime.Now, "1");
+    var item = new BacklogItem("Pray", "Praying for a good grade", null, DateTime.Now);
+    var item2 = new BacklogItem("Test", "Test", null, DateTime.Now);
     backlog.AddItemToBacklog(item);
     backlog.AddItemToBacklog(item2);
     var reportTemplate = new YearReport(project.GetProjectBacklog());
@@ -93,8 +93,8 @@ static void TestBacklogIterface()
     var projectBacklog = new ProjectBacklog(Guid.NewGuid());
     var sprint = new ReviewSprint("", DateTime.Now, DateTime.Now);
     BacklogInterface projectBacklogInterface = projectBacklog;
-    var item = new BacklogItem("Test", "Test", null, DateTime.Now, "1");
-    var item2 = new BacklogItem("Test2", "Test", null, DateTime.Now, "1");
+    var item = new BacklogItem("Test", "Test", null, DateTime.Now);
+    var item2 = new BacklogItem("Test2", "Test", null, DateTime.Now);
     projectBacklogInterface.AddItemToBacklog(item);
     projectBacklogInterface.AddItemToBacklog(item2);
     BacklogInterface sprintBacklog = sprint;
@@ -113,10 +113,10 @@ static void TestStrategySprint()
 {
     var releaseSprint = new ReleaseSprint("Test", DateTime.Now, DateTime.Now);
     releaseSprint.SetState(releaseSprint.GetActiveState());
-    releaseSprint.AddItemToBacklog(new BacklogItem("Test", "Test", null, DateTime.Now, "1"));
+    releaseSprint.AddItemToBacklog(new BacklogItem("Test", "Test", null, DateTime.Now));
     Console.WriteLine(releaseSprint.getBacklogItems().First().Name);
     releaseSprint.SetState(releaseSprint.GetFinishedState());
-    releaseSprint.AddItemToBacklog(new BacklogItem("Test", "Test", null, DateTime.Now, "1"));
+    releaseSprint.AddItemToBacklog(new BacklogItem("Test", "Test", null, DateTime.Now));
 }
 
 static void TestBacklogItemState()
@@ -126,10 +126,10 @@ static void TestBacklogItemState()
     var activitys = new List<Activity>();
     activitys.Add(activity);
     activitys.Add(activity2);
-    var backlogItem = new BacklogItem("Test", "Test", activitys, DateTime.Now, "1");
+    var backlogItem = new BacklogItem("Test", "Test", activitys, DateTime.Now);
     var notificationService = new EmailObserver();
-    var user = new User("Test", "test", 5, DateTime.Now, RoleType.LEAD_DEVELOPER, notificationService);
-    var testUser = new User("Test", "test", 5, DateTime.Now, RoleType.TESTER, notificationService);
+    var user = new User("Test", "test", DateTime.Now, RoleType.LEAD_DEVELOPER, notificationService);
+    var testUser = new User("Test", "test", DateTime.Now, RoleType.TESTER, notificationService);
     backlogItem.AssignUser(user);
     backlogItem.ChangeState(backlogItem.GetDoingState());
     backlogItem.RemoveUser(user);
@@ -169,8 +169,8 @@ static void TestReviewSprint(){
     BacklogProvider biProvider = sprint;
     BacklogInterface biInterface = sprint;
 
-    var item = new BacklogItem("Test", "Test", null, DateTime.Now, "1");
-    var item2 = new BacklogItem("Test2", "Test", null, DateTime.Now, "1");
+    var item = new BacklogItem("Test", "Test", null, DateTime.Now);
+    var item2 = new BacklogItem("Test2", "Test", null, DateTime.Now);
     projectBacklogInterface.AddItemToBacklog(item);
     projectBacklogInterface.AddItemToBacklog(item2);
 
@@ -204,6 +204,6 @@ static void TestSprintSetNameWhenCreated()
     Console.WriteLine(sprint.Name);
     Console.WriteLine(sprint.StartTime);
     Console.WriteLine(sprint.EndTime);
-    var item = new BacklogItem("Test", "Test", null, DateTime.Now, "1");
+    var item = new BacklogItem("Test", "Test", null, DateTime.Now);
     sprint.AddItemToBacklog(item);
 }

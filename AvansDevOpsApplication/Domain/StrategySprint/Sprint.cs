@@ -26,6 +26,10 @@ namespace AvansDevOpsApplication.Domain.StrategySprint
             this.backlogItemInSprint = new List<BacklogItem>();
         }
 
+        public virtual ISprintState GetState()
+        {
+            return this.state;
+        }
         public virtual void SetState(ISprintState state) {
             this.state = state;
         }
