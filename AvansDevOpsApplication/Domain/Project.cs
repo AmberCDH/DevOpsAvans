@@ -2,16 +2,16 @@
 {
     public class Project
     {
-        private Guid Id;
-        private string Description;
         private ProjectBacklog ProjectBacklog;
-
         public Project(string description)
         {
             Id = Guid.NewGuid();
             Description = description;
             ProjectBacklog = new ProjectBacklog(Guid.NewGuid());
         }
+
+        public Guid Id { get; init; }
+        public string Description { get; set; }
 
         public ProjectBacklog GetProjectBacklog()
         {

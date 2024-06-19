@@ -40,6 +40,8 @@ namespace AvansDevOpsApplication.Domain
             get { return birthday; }
         }
 
+        public Guid Id { get => id; set => id = value; }
+
         public string toString()
         {
             return "User ~ Name; " + name + " ~ Birthday; " + birthday + " ~ Role; " + role;

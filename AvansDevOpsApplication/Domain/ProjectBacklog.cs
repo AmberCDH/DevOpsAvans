@@ -12,6 +12,8 @@ namespace AvansDevOpsApplication.Domain
             this.id = id;
         }
 
+        public Guid Id { get => id; set => id = value; }
+
         public void AddItemToBacklog(BacklogItem backlogItem)
         {
             backlogItems.Add(backlogItem);

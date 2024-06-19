@@ -20,9 +20,9 @@
             this.children.Remove(forumComponent);
         }
 
-        public override ForumComponent GetChild(int index)
+        public override ForumComponent GetChild(int i)
         {
-            return children[index];
+            return children[i];
         }
 
         public override void Print()

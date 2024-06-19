@@ -35,7 +35,7 @@ namespace AvansDevOpsApplication.Domain
             this.id = Guid.NewGuid();
  
             doingState = new DoingState(this);
-            doneState = new DoneState(this);
+            doneState = new DoneState();
             todoState   = new TodoState(this);
             testingState = new TestingState(this);
             readyForTestingState = new ReadyForTestingState(this);

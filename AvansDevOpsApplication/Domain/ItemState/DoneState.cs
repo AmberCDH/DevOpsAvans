@@ -2,12 +2,6 @@
 {
     public class DoneState : IItemState
     {
-        private BacklogItem backlogItem;
-        public DoneState(BacklogItem backlogItem)
-        {
-            this.backlogItem = backlogItem;
-        }
-
         public void AssignUser(User user)
         {
             Console.WriteLine("Can't assign users in done state");

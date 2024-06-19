@@ -10,15 +10,13 @@ namespace AvansDevOpsApplication.Domain
         private IActivityState activityState;
 
         private IActivityState todoActivityState;
-        private IActivityState doneActivityState;
 
         public Activity(string comment, string name)
         {
             this.comment = comment;
-            this.name = name;
+            this.Name = name;
 
             todoActivityState = new ToDoActivityState(this);
-            doneActivityState = new DoneActivityState(this);
 
             this.activityState = todoActivityState;
 
@@ -29,7 +27,9 @@ namespace AvansDevOpsApplication.Domain
             get { return comment; }
             set { comment = value; }
         }
-       
+
+        public string Name { get => name; set => name = value; }
+
         public string toString()
         {
             return "Activity ~ Comment; " + comment;

@@ -3,7 +3,7 @@
     internal class YearReport : ReportTemplate
     {
         private BacklogProvider backlogProvider;
-        public YearReport(BacklogProvider backlogProvider) : base(backlogProvider)
+        public YearReport(BacklogProvider backlogProvider)
         {
             this.backlogProvider = backlogProvider;
         }
