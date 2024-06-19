@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AvansDevOpsApplication.Domain.ReportTemplate
+﻿namespace AvansDevOpsApplication.Domain.ReportTemplate
 {
     internal class WeekReport : ReportTemplate
     {
@@ -21,17 +15,20 @@ namespace AvansDevOpsApplication.Domain.ReportTemplate
 
         protected override void SetBody(List<BacklogItem> backlogItems)
         {
-            throw new NotImplementedException();
+            foreach (var item in backlogItems)
+            {
+                Console.WriteLine("~Backlog item: "+item.Name+", ~User that worked on it: "+ item.User.Name);
+            }
         }
 
         protected override void SetFooter()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("=============="+DateTime.Now+"==============");
         }
 
         protected override void SetHeader()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Weekly backlog report");
         }
     }
 }

@@ -1,6 +1,4 @@
-﻿using AvansDevOpsApplication.Domain.ReportTemplate;
-
-namespace AvansDevOpsApplication.Domain
+﻿namespace AvansDevOpsApplication.Domain
 {
     public class Project
     {

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AvansDevOpsApplication.Domain.ItemState
+﻿namespace AvansDevOpsApplication.Domain.ItemState
 {
     public class DoneState : IItemState
     {
@@ -16,17 +10,17 @@ namespace AvansDevOpsApplication.Domain.ItemState
 
         public void AssignUser(User user)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Can't assign users in done state");
         }
 
         public void ChangeState(IItemState state)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Can't change state");
         }
 
         public void RemoveUser(User user)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Can't remove users in done state");
         }
     }
 }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AvansDevOpsApplication.Domain.ItemState
+﻿namespace AvansDevOpsApplication.Domain.ItemState
 {
     public class ReadyForTestingState : IItemState
     {
@@ -16,17 +10,32 @@ namespace AvansDevOpsApplication.Domain.ItemState
 
         public void AssignUser(User user)
         {
-            throw new NotImplementedException();
+            if (user.Role == RoleType.TESTER)
+            {
+                backlogItem.AssigedUsers.Add(user);
+            } else
+            {
+                Console.WriteLine("User is not a tester");
+            }
         }
 
         public void ChangeState(IItemState state)
         {
-            throw new NotImplementedException();
+            if (backlogItem.AssigedUsers.Where(x => x.Role == RoleType.TESTER).Count() >= 1 && state == backlogItem.GetTestingState())
+            {
+                backlogItem.SetState(state);
+            } else
+            {
+                Console.WriteLine("At least one tester should be assigned");
+            }
         }
 
         public void RemoveUser(User user)
         {
-            throw new NotImplementedException();
+            if (user.Role == RoleType.TESTER)
+            {
+                backlogItem.AssigedUsers.Remove(user);
+            }
         }
     }
 }

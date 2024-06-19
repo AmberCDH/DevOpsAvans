@@ -1,4 +1,5 @@
-﻿using AvansDevOpsApplication.Domain.ItemState;
+﻿using AvansDevOpsApplication.Domain.ActivityState;
+using AvansDevOpsApplication.Domain.ItemState;
 using AvansDevOpsApplication.Domain.NotificationObserver;
 
 namespace AvansDevOpsApplication.Domain
@@ -33,11 +34,13 @@ namespace AvansDevOpsApplication.Domain
             this.inList = inList;
             this.activitys = activitys ?? new List<Activity>();
             this.id = Guid.NewGuid();
+ 
             doingState = new DoingState(this);
             doneState = new DoneState(this);
             todoState   = new TodoState(this);
             testingState = new TestingState(this);
             readyForTestingState = new ReadyForTestingState(this);
+            this.itemState = todoState;
         }
 
         public string Name { get => name; set => name = value; }
@@ -94,44 +97,12 @@ namespace AvansDevOpsApplication.Domain
         }
         public void ChangeState(IItemState state)
         {
-            state.ChangeState(state);
+            itemState.ChangeState(state);
         }
 
         public void SetState(IItemState state)
         {
             this.itemState = state;
-          /*  switch (itemState)
-            {
-                case ItemState.Todo:
-                    if (x == ItemState.Doing && assignedUsers.Count > 0)
-                    {
-                        itemState = x;
-                        NotifyObserver("Item in progress");
-                    }
-                    break;
-
-                case ItemState.Doing:
-                    if (x == ItemState.Testing)
-                    {
-                        itemState = x;
-                        NotifyObserver("Item ready for testing");
-                    }
-                    break;
-
-                case ItemState.Testing:
-                    if (x == ItemState.Doing)
-                    {
-                        itemState = x;
-                        NotifyObserver("Testfindings");
-                    }
-                    if (x == ItemState.Done)
-                    {
-                        itemState = x;
-                        timeCompleted = DateTime.Now;
-                        NotifyObserver("Item done");
-                    }
-                    break;
-            }*/
         }
 
         public IItemState GetTodoState()
@@ -161,6 +132,18 @@ namespace AvansDevOpsApplication.Domain
         public IItemState GetState()
         {
             return itemState;
+        }
+
+        public bool activitysDone()
+        {
+            foreach(Activity a in activitys)
+            {
+                if (a.getState().GetType() != typeof(DoneActivityState))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

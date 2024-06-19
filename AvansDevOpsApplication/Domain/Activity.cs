@@ -1,20 +1,27 @@
-﻿namespace AvansDevOpsApplication.Domain
+﻿using AvansDevOpsApplication.Domain.ActivityState;
+
+namespace AvansDevOpsApplication.Domain
 {
     public class Activity
     {
         private string name;
         private string comment;
-        private DateTime time;
-        private BacklogItem backlogItem;
-        private ActivityState activityState;
 
-        public Activity(string comment, DateTime time, BacklogItem backlogItem, string name)
+        private IActivityState activityState;
+
+        private IActivityState todoActivityState;
+        private IActivityState doneActivityState;
+
+        public Activity(string comment, string name)
         {
             this.comment = comment;
-            this.time = time;
-            this.backlogItem = backlogItem;
             this.name = name;
-            activityState = ActivityState.Todo; 
+
+            todoActivityState = new ToDoActivityState(this);
+            doneActivityState = new DoneActivityState(this);
+
+            this.activityState = todoActivityState;
+
         }
 
         public string Comment
@@ -23,29 +30,23 @@
             set { comment = value; }
         }
        
-        public DateTime Time
-        {
-            get { return time; }
-        }
         public string toString()
         {
-            return "Activity ~ Comment; " + comment + " ~ " + time;
+            return "Activity ~ Comment; " + comment;
         }
 
-        public ActivityState ActivityState { get { return activityState; } }
-
-        public void SetState(ActivityState x)
+        public void SetState(IActivityState state)
         {
-            switch (activityState)
-            {
-                case ActivityState.Todo:
-                    if(x == ActivityState.Done)
-                    {
-                        activityState = x;
-                        backlogItem.NotifyObserver("Activity: " + name + " completed");
-                    }
-                    break;
-            }
+            this.activityState = state;
+        }
+        public void ChangeState(IActivityState state)
+        {
+            this.activityState.ChangeState(state);
+        }
+
+        public IActivityState getState()
+        {
+            return this.activityState;
         }
     }
 }

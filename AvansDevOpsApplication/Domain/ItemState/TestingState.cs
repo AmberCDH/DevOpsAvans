@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AvansDevOpsApplication.Domain.ItemState
+﻿namespace AvansDevOpsApplication.Domain.ItemState
 {
     public class TestingState : IItemState
     {
@@ -16,17 +10,29 @@ namespace AvansDevOpsApplication.Domain.ItemState
 
         public void AssignUser(User user)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Can't assign users in testing state");
         }
 
         public void ChangeState(IItemState state)
         {
-            throw new NotImplementedException();
+            if (state == backlogItem.GetTodoState())
+            {
+                backlogItem.AssigedUsers = [];
+                backlogItem.SetState(state);
+            }
+            else if (state == backlogItem.GetDoneState() && backlogItem.activitysDone())
+            {
+                backlogItem.SetState(state);
+            }
+            else
+            {
+                Console.WriteLine("Invalid operation");
+            }
         }
 
         public void RemoveUser(User user)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Can't remove users in testing state");
         }
     }
 }

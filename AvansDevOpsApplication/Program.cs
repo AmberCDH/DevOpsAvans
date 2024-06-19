@@ -1,13 +1,18 @@
 ﻿using AvansDevOpsApplication.Domain;
+using AvansDevOpsApplication.Domain.ActivityState;
 using AvansDevOpsApplication.Domain.CompositeForum;
 using AvansDevOpsApplication.Domain.Factory;
 using AvansDevOpsApplication.Domain.NotificationObserver;
 using AvansDevOpsApplication.Domain.ReportTemplate;
+using AvansDevOpsApplication.Domain.SprintState.ReviewSprintState;
 using AvansDevOpsApplication.Domain.StrategySprint;
 
 QuestPDF.Settings.License = QuestPDF.Infrastructure.LicenseType.Community;
-
-TestStrategySprint();
+TestSprintSetNameWhenCreated();
+//TestReviewSprint();
+//TestActivityState();
+//TestBacklogItemState();
+//TestStrategySprint();
 //TestBacklogIterface();
 //ProjectBacklogExport();
 //Composite();
@@ -112,4 +117,93 @@ static void TestStrategySprint()
     Console.WriteLine(releaseSprint.getBacklogItems().First().Name);
     releaseSprint.SetState(releaseSprint.GetFinishedState());
     releaseSprint.AddItemToBacklog(new BacklogItem("Test", "Test", null, DateTime.Now, "1"));
+}
+
+static void TestBacklogItemState()
+{
+    var activity = new Activity("Doe maar iets maken ofzo", "Mooie activity");
+    var activity2 = new Activity("Maak iets vreemds in de code", "Nieuwe activity");
+    var activitys = new List<Activity>();
+    activitys.Add(activity);
+    activitys.Add(activity2);
+    var backlogItem = new BacklogItem("Test", "Test", activitys, DateTime.Now, "1");
+    var notificationService = new EmailObserver();
+    var user = new User("Test", "test", 5, DateTime.Now, RoleType.LEAD_DEVELOPER, notificationService);
+    var testUser = new User("Test", "test", 5, DateTime.Now, RoleType.TESTER, notificationService);
+    backlogItem.AssignUser(user);
+    backlogItem.ChangeState(backlogItem.GetDoingState());
+    backlogItem.RemoveUser(user);
+    backlogItem.ChangeState(backlogItem.GetReadyForTestingState());
+    backlogItem.AssignUser(user);
+    backlogItem.ChangeState(backlogItem.GetTestingState());
+    backlogItem.AssignUser(testUser);
+    backlogItem.ChangeState(backlogItem.GetTestingState());
+    backlogItem.RemoveUser(testUser);
+    //backlogItem.ChangeState(backlogItem.GetTodoState());
+    //backlogItem.ChangeState(backlogItem.GetDoingState());
+    backlogItem.ChangeState(backlogItem.GetDoneState());
+    activity.SetState(new DoneActivityState(activity));
+    activity2.SetState(new DoneActivityState(activity2));
+    backlogItem.ChangeState(backlogItem.GetDoneState());
+    backlogItem.ChangeState(backlogItem.GetTodoState());
+}
+
+static void TestActivityState()
+{
+    var activity = new Activity("Doe maar iets maken ofzo", "Mooie activity");
+    Console.WriteLine(activity.getState().ToString());
+    activity.ChangeState(new ToDoActivityState(activity));
+    Console.WriteLine(activity.getState().ToString());
+    activity.ChangeState(new DoneActivityState(activity));
+    Console.WriteLine(activity.getState().ToString());
+    activity.ChangeState(new DoneActivityState(activity));
+    Console.WriteLine(activity.getState().ToString());
+}
+
+static void TestReviewSprint(){
+    var projectBacklog = new ProjectBacklog(Guid.NewGuid());
+    var sprint = new ReviewSprint("", DateTime.Now, DateTime.Now);
+    BacklogInterface projectBacklogInterface = projectBacklog;
+    BacklogProvider projectBacklogProvider = projectBacklog;
+
+    BacklogProvider biProvider = sprint;
+    BacklogInterface biInterface = sprint;
+
+    var item = new BacklogItem("Test", "Test", null, DateTime.Now, "1");
+    var item2 = new BacklogItem("Test2", "Test", null, DateTime.Now, "1");
+    projectBacklogInterface.AddItemToBacklog(item);
+    projectBacklogInterface.AddItemToBacklog(item2);
+
+    BacklogItemManager manager = new BacklogItemManager();
+
+
+    manager.MoveBacklogItem(projectBacklog, sprint, item);
+    
+    Console.WriteLine(sprint.getBacklogItems().First().Name);
+    Console.WriteLine(sprint.getBacklogItems().Count());
+    manager.MoveBacklogItem(projectBacklog, sprint, item);
+    Console.WriteLine(sprint.getBacklogItems().Count());
+}
+
+static void TestSprintSetNameWhenCreated()
+{
+    var sprint = new ReviewSprint("groen", DateTime.Now, DateTime.Now);
+    Console.WriteLine(sprint.Name);
+    Console.WriteLine(sprint.StartTime);
+    Console.WriteLine(sprint.EndTime);
+    sprint.SetName("Blauw");
+    sprint.SetStartTime(new DateTime(1995, 1, 1));
+    sprint.SetEndTime(new DateTime(1995, 1, 1));
+    Console.WriteLine(sprint.Name);
+    Console.WriteLine(sprint.StartTime);
+    Console.WriteLine(sprint.EndTime);
+    sprint.SetState(new CancelReviewState(sprint));
+    sprint.SetName("Send help");
+    sprint.SetStartTime(DateTime.Now);
+    sprint.SetEndTime(DateTime.Now);
+    Console.WriteLine(sprint.Name);
+    Console.WriteLine(sprint.StartTime);
+    Console.WriteLine(sprint.EndTime);
+    var item = new BacklogItem("Test", "Test", null, DateTime.Now, "1");
+    sprint.AddItemToBacklog(item);
 }

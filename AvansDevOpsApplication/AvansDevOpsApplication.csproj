@@ -19,7 +19,4 @@
 	  <Value>**/Program.cs, **/Domain/Composite/ForumComponent.cs, **/Domain/Models/CompletedBacklogItem.cs, **/Domain/BurndownChart.cs</Value>
 	</SonarQubeSetting>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Domain\ActivityState\" />
-  </ItemGroup>
 </Project>

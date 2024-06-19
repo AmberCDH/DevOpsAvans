@@ -21,10 +21,11 @@
 
         public void ChangeState(IItemState state)
         {
-            if(backlogItem.AssigedUsers.Count() >= 1)
+            if (backlogItem.AssigedUsers.Count() >= 1 && state == backlogItem.GetDoingState())
             {
-            backlogItem.SetState(state);
-            } else
+                backlogItem.SetState(state);
+            }
+            else
             {
                 Console.WriteLine("No assigned users");
             }

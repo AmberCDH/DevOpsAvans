@@ -2,22 +2,22 @@
 
 namespace AvansDevOpsApplication.Domain.SprintState.ReviewSprintState
 {
-    public class ActiveReleaseState : ISprintState
+    public class CancelReviewState : ISprintState
     {
-        private ReleaseSprint sprint;
-        public ActiveReleaseState(ReleaseSprint sprint)
+        private ReviewSprint sprint;
+        public CancelReviewState(ReviewSprint sprint)
         {
             this.sprint = sprint;
         }
 
         public void AddBacklogItem(BacklogItem backlogItem)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Sprint review is canceled");
         }
 
         public void RemoveBacklogItem(Guid id)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Sprint review is canceled");
         }
     }
 }

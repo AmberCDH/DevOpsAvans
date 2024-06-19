@@ -1,5 +1,4 @@
-﻿using AvansDevOpsApplication.Domain.ItemState;
-using AvansDevOpsApplication.Domain.Models;
+﻿using AvansDevOpsApplication.Domain.Models;
 using AvansDevOpsApplication.Domain.StrategySprint;
 
 namespace AvansDevOpsApplication.Domain
