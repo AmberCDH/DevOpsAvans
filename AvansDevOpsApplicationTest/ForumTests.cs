@@ -11,7 +11,7 @@ namespace AvansDevOpsApplication.Tests
         public void ShouldCreateForum()
         {
             //Arrange
-            var backlogItem = new BacklogItem("Name", "Nice description", null, DateTime.Now, "Backlog");
+            var backlogItem = new BacklogItem("Name", "Backlog for the turtle shop project", null, DateTime.Now);
             var forum = new Forum(backlogItem);
 
             //Assert
@@ -23,7 +23,7 @@ namespace AvansDevOpsApplication.Tests
         {
             //Arrange
             var user = new User("John", "john@example.com", 30, new DateTime(1992, 1, 1), RoleType.DEVELOPER, new EmailObserver());
-            var backlogItem = new BacklogItem("Name", "Nice description", null, DateTime.Now, "Backlog");
+            var backlogItem = new BacklogItem("Name", "Backlog for the turtle shop project", null, DateTime.Now);
             var forum = new Forum(backlogItem);
             var reactions = new List<ForumComponent>();
             var post = new Post("What is the meaning of life", "I was wondering what is the meaning of life", DateTime.Now, user);
@@ -40,7 +40,7 @@ namespace AvansDevOpsApplication.Tests
         {
             //Arrange
             var user = new User("John", "john@example.com", 30, new DateTime(1992, 1, 1), RoleType.DEVELOPER, new EmailObserver());
-            var backlogItem = new BacklogItem("Name", "Nice description", null, DateTime.Now, "Backlog");
+            var backlogItem = new BacklogItem("Name", "Backlog for the turtle shop project", null, DateTime.Now);
             var forum = new Forum(backlogItem);
             var reaction = new Reaction("42", DateTime.Now, user);
             var post = new Post("What is the meaning of life", "I was wondering what is the meaning of life", DateTime.Now, user);
@@ -58,7 +58,7 @@ namespace AvansDevOpsApplication.Tests
         {
             //Arrange
             var user = new User("John", "john@example.com", 30, new DateTime(1992, 1, 1), RoleType.DEVELOPER, new EmailObserver());
-            var backlogItem = new BacklogItem("Name", "Nice description", null, DateTime.Now, "Backlog");
+            var backlogItem = new BacklogItem("Name", "Backlog for the turtle shop project", null, DateTime.Now);
             var forum = new Forum(backlogItem);
             var reaction = new Reaction("42", DateTime.Now, user);
             var post = new Post("What is the meaning of life", "I was wondering what is the meaning of life", DateTime.Now, user);
@@ -78,7 +78,7 @@ namespace AvansDevOpsApplication.Tests
         {
             //Arrange
             var user = new User("John", "john@example.com", 30, new DateTime(1992, 1, 1), RoleType.DEVELOPER, new EmailObserver());
-            var backlogItem = new BacklogItem("Name", "Nice description", null, DateTime.Now, "Backlog");
+            var backlogItem = new BacklogItem("Name", "Backlog for the turtle shop project", null, DateTime.Now);
             var forum = new Forum(backlogItem);
             var reaction = new Reaction("42", DateTime.Now, user);
             var post = new Post("What is the meaning of life", "I was wondering what is the meaning of life", DateTime.Now, user);

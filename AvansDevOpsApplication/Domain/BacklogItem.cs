@@ -26,12 +26,11 @@ namespace AvansDevOpsApplication.Domain
         private IItemState testingState;
         private IItemState readyForTestingState;
 
-        public BacklogItem(string name, string description, List<Activity>? activitys, DateTime timeOfCreation, string inList)
+        public BacklogItem(string name, string description, List<Activity>? activitys, DateTime timeOfCreation)
         {
             this.name = name;
             this.description = description;
             this.timeOfCreation = timeOfCreation;
-            this.inList = inList;
             this.activitys = activitys ?? new List<Activity>();
             this.id = Guid.NewGuid();
  
@@ -48,7 +47,6 @@ namespace AvansDevOpsApplication.Domain
         public string Description { get => description; set => description = value; }
         public User User { get => user; set => user = value; }
         public bool WantsNotification { get => wantsNotification; set => wantsNotification = value; }
-        public string InList { get => inList; set => inList = value; }
         public DateTime TimeOfCreation { get => timeOfCreation; set => timeOfCreation = value; }
         public List<Activity> Activitys { get => activitys; set => activitys = value; }
         public List<User> AssigedUsers { get => assignedUsers; set => assignedUsers = value; }

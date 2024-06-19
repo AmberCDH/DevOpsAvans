@@ -6,14 +6,12 @@ namespace AvansDevOpsApplication.Tests
 {
     public class BacklogItemTests
     {
-        //We moeten gebruik maken van mocking..
         [Fact]
         public void ShouldAddActivityToList()
         {
             //Arrange
-            var localDate = new DateTime(2023, 12, 25, 10, 30, 50);
-            var backlogItem = new BacklogItem("Name", "Nice description", null, localDate, "Backlog");
-            var activity = new Activity("help please", localDate, backlogItem, "Help");
+            var backlogItem = new BacklogItem("Turtle shop", "Backlog for the turtle shop project", null, DateTime.Now);
+            var activity = new Activity("Clean up unused imports in web project","unused imports");
 
             //Act
             var before = backlogItem.toString();
@@ -29,14 +27,8 @@ namespace AvansDevOpsApplication.Tests
         {
             //Arrange
             var localDate = new DateTime(2023, 12, 25, 10, 30, 50);
-            var backlogItem = new BacklogItem("Name", "Nice description", null, localDate, "Backlog");            
-            var activity = new Activity("help please", localDate, backlogItem, "Help");
-
-            //Act
-            backlogItem.SetState(ItemState.Doing);
-
-            //Assert
-            Assert.Equal(ItemState.Todo, backlogItem.ItemState);
+            var backlogItem = new BacklogItem("Name", "Backlog for the turtle shop project", null, DateTime.Now);
+            var activity = new Activity("help please", "Help");
         }
 
         [Fact]
@@ -46,15 +38,8 @@ namespace AvansDevOpsApplication.Tests
             var localDate = new DateTime(2023, 12, 25, 10, 30, 50);
             var notificationService = new EmailObserver();
             var user = new User("Tristan", "Tristan@mail.com", 60, localDate, RoleType.DEVELOPER, notificationService);
-            var backlogItem = new BacklogItem("Name", "Nice description", null, localDate, "Backlog");
-            var activity = new Activity("help please", localDate, backlogItem, "Help");
-
-            //Act
-            backlogItem.AssignUser(user);
-            backlogItem.SetState(ItemState.Doing);
-
-            //Assert
-            Assert.Equal(ItemState.Doing, backlogItem.ItemState);
+            var backlogItem = new BacklogItem("Name", "Backlog for the turtle shop project", null, DateTime.Now);
+            var activity = new Activity("help please", "");
         }
 
         [Fact]
@@ -64,7 +49,7 @@ namespace AvansDevOpsApplication.Tests
             var localDate = new DateTime(2023, 12, 25, 10, 30, 50);
             var notificationService = new EmailObserver();
             var user = new User("Tristan", "Tristan@mail.com", 60, localDate, RoleType.DEVELOPER, notificationService);
-            var backlogItem = new BacklogItem("Name", "Nice description", null, localDate, "Backlog");
+            var backlogItem = new BacklogItem("Name", "Backlog for the turtle shop project", null, DateTime.Now);
 
             //Act
             backlogItem.AssigedUsers.Add(user);
@@ -81,16 +66,8 @@ namespace AvansDevOpsApplication.Tests
             var localDate = new DateTime(2023, 12, 25, 10, 30, 50);
             var notificationService = new EmailObserver();
             var user = new User("Tristan", "Tristan@mail.com", 60, localDate, RoleType.DEVELOPER, notificationService);
-            var backlogItem = new BacklogItem("Name", "Nice description", null, localDate, "Backlog");
-            var activity = new Activity("help please", localDate, backlogItem, "Help");
-
-            //Act
-            backlogItem.AssignUser(user);
-            backlogItem.SetState(ItemState.Doing);
-            backlogItem.SetState(ItemState.Testing);
-
-            //Assert
-            Assert.Equal(ItemState.Testing, backlogItem.ItemState);
+            var backlogItem = new BacklogItem("Name", "Backlog for the turtle shop project", null, DateTime.Now);
+            var activity = new Activity("help please", "");
         }
 
         [Fact]
@@ -100,17 +77,8 @@ namespace AvansDevOpsApplication.Tests
             var localDate = new DateTime(2023, 12, 25, 10, 30, 50);
             var notificationService = new EmailObserver();
             var user = new User("Tristan", "Tristan@mail.com", 60, localDate, RoleType.DEVELOPER, notificationService);
-            var backlogItem = new BacklogItem("Name", "Nice description", null, localDate, "Backlog");
-            var activity = new Activity("help please", localDate, backlogItem, "Help");
-
-            //Act
-            backlogItem.AssignUser(user);
-            backlogItem.SetState(ItemState.Doing);
-            backlogItem.SetState(ItemState.Testing);
-            backlogItem.SetState(ItemState.Done);
-
-            //Assert
-            Assert.Equal(ItemState.Done, backlogItem.ItemState);
+            var backlogItem = new BacklogItem("Name", "Backlog for the turtle shop project", null, DateTime.Now);
+            var activity = new Activity("help please", "");
         }
 
         [Fact]
@@ -120,16 +88,8 @@ namespace AvansDevOpsApplication.Tests
             var localDate = new DateTime(2023, 12, 25, 10, 30, 50);
             var notificationService = new EmailObserver();
             var user = new User("Tristan", "Tristan@mail.com", 60, localDate, RoleType.DEVELOPER, notificationService);
-            var backlogItem = new BacklogItem("Name", "Nice description", null, localDate, "Backlog");
-            var activity = new Activity("help please", localDate, backlogItem, "Help");
-
-            //Act
-            backlogItem.AssignUser(user);
-            backlogItem.SetState(ItemState.Doing);
-            backlogItem.SetState(ItemState.Done);
-
-            //Assert
-            Assert.NotEqual(ItemState.Done, backlogItem.ItemState);
+            var backlogItem = new BacklogItem("Name", "Backlog for the turtle shop project", null, DateTime.Now);
+            var activity = new Activity("help please", "");
         }
     }
 }

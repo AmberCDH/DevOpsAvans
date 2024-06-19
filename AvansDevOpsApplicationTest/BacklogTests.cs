@@ -11,7 +11,7 @@ namespace AvansDevOpsApplication.Tests
             //Arrange
             var localDate = new DateTime(2023, 12, 25, 10, 30, 50);
             var backlog = new ProjectBacklog(Guid.NewGuid());
-            var backlogItem = new BacklogItem("Name", "Nice description", null, localDate, "Backlog");
+            var backlogItem = new BacklogItem("Name", "Backlog for the turtle shop project", null, DateTime.Now);
 
             //Act
             backlog.AddItemToBacklog(backlogItem);
@@ -26,7 +26,7 @@ namespace AvansDevOpsApplication.Tests
             //Arrange
             var localDate = new DateTime(2023, 12, 25, 10, 30, 50);
             var backlog = new ProjectBacklog(Guid.NewGuid());
-            var backlogItem = new BacklogItem("Name", "Nice description", null, localDate, "Backlog");
+            var backlogItem = new BacklogItem("Name", "Backlog for the turtle shop project", null, DateTime.Now);
 
             //Act
             backlog.AddItemToBacklog(backlogItem);
