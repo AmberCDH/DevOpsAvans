@@ -8,7 +8,7 @@ using AvansDevOpsApplication.Domain.SprintState.ReviewSprintState;
 using AvansDevOpsApplication.Domain.StrategySprint;
 
 QuestPDF.Settings.License = QuestPDF.Infrastructure.LicenseType.Community;
-TestSprintSetNameWhenCreated();
+//TestSprintSetNameWhenCreated();
 //TestReviewSprint();
 //TestActivityState();
 //TestBacklogItemState();
