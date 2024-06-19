@@ -6,10 +6,10 @@ using FluentAssertions;
 
 namespace AvansDevOpsApplication.Tests.SprintTests
 {
-    public class ReleaseSprintStateTests
+    public class ReleaseSprintTests
     {
         [Fact]
-        public void ShouldSetReleaseStateActive()
+        public void ShouldSetReleaseSprintToActive()
         {
             //Arrange
             var startDate = new DateTime(2023, 12, 25);
@@ -24,7 +24,7 @@ namespace AvansDevOpsApplication.Tests.SprintTests
             sprint.GetActiveState().Should().BeOfType<ActiveReleaseState>();
         }
         [Fact]
-        public void ShouldSetReleaseStateCreated()
+        public void ShouldSetReleaseSprintToCreated()
         {
             //Arrange
             var startDate = new DateTime(2023, 12, 25);
@@ -39,7 +39,7 @@ namespace AvansDevOpsApplication.Tests.SprintTests
             sprint.GetState().Should().BeOfType<CreatedReleaseState>();
         }
         [Fact]
-        public void ShouldSetReleaseStateFinished()
+        public void ShouldSetReleaseSprintToFinished()
         {
             //Arrange
             var startDate = new DateTime(2023, 12, 25);
@@ -55,7 +55,7 @@ namespace AvansDevOpsApplication.Tests.SprintTests
         }
 
         [Fact]
-        public void ShouldAddBacklogItemInReleaseActiveState()
+        public void ShouldAddBacklogItemToReleaseSprintInActiveState()
         {
             //Arrange
             var startDate = new DateTime(2023, 12, 25);
@@ -74,7 +74,7 @@ namespace AvansDevOpsApplication.Tests.SprintTests
         }
 
         [Fact]
-        public void ShouldRemoveBacklogItemInReleaseActiveState()
+        public void ShouldRemoveBacklogItemFromReleaseSprintInActiveState()
         {
             //Arrange
             var startDate = new DateTime(2023, 12, 25);
