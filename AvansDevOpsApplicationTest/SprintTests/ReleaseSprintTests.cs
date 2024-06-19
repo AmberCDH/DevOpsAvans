@@ -4,78 +4,63 @@ using AvansDevOpsApplication.Domain.SprintState.ReviewSprintState;
 using AvansDevOpsApplication.Domain.StrategySprint;
 using FluentAssertions;
 
-namespace AvansDevOpsApplication.Tests
+namespace AvansDevOpsApplication.Tests.SprintTests
 {
-    public class SprintStateTests
+    public class ReleaseSprintStateTests
     {
         [Fact]
-        public void ShouldSetStateActive()
+        public void ShouldSetReleaseStateActive()
         {
             //Arrange
             var startDate = new DateTime(2023, 12, 25);
             var endDate = DateTime.Now;
-            var sprint = new ReviewSprint("Cool sprint", startDate, endDate);
+            var sprint = new ReleaseSprint("Cool sprint", startDate, endDate);
 
             //Act
             sprint.SetState(sprint.GetActiveState());
 
 
             //Assert
-            sprint.GetActiveState().Should().BeOfType<ActiveReviewState>();
+            sprint.GetActiveState().Should().BeOfType<ActiveReleaseState>();
         }
         [Fact]
-        public void ShouldSetStateCreated()
+        public void ShouldSetReleaseStateCreated()
         {
             //Arrange
             var startDate = new DateTime(2023, 12, 25);
             var endDate = DateTime.Now;
-            var sprint = new ReviewSprint("Cool sprint", startDate, endDate);
+            var sprint = new ReleaseSprint("Cool sprint", startDate, endDate);
 
             //Act
             sprint.SetState(sprint.GetCreatedState());
 
 
             //Assert
-            sprint.GetState().Should().BeOfType<CreatedReviewState>();
+            sprint.GetState().Should().BeOfType<CreatedReleaseState>();
         }
         [Fact]
-        public void ShouldSetStateFinished()
+        public void ShouldSetReleaseStateFinished()
         {
             //Arrange
             var startDate = new DateTime(2023, 12, 25);
             var endDate = DateTime.Now;
-            var sprint = new ReviewSprint("Cool sprint", startDate, endDate);
+            var sprint = new ReleaseSprint("Cool sprint", startDate, endDate);
 
             //Act
             sprint.SetState(sprint.GetFinishedState());
 
 
             //Assert
-            sprint.GetState().Should().BeOfType<FinishedReviewState>();
+            sprint.GetState().Should().BeOfType<FinishedReleaseState>();
         }
+
         [Fact]
-        public void ShouldSetStatePipeline()
+        public void ShouldAddBacklogItemInReleaseActiveState()
         {
             //Arrange
             var startDate = new DateTime(2023, 12, 25);
             var endDate = DateTime.Now;
-            var sprint = new ReviewSprint("Cool sprint", startDate, endDate);
-
-            //Act
-            sprint.SetState(sprint.GetPipelineState());
-
-
-            //Assert
-            sprint.GetState().Should().BeOfType<PipelineReviewState>();
-        }
-
-        [Fact]
-        public void ShouldAddBacklogItemInActiveState()
-        {
-            //Arrange
-            var startDate = new DateTime(2023, 12, 25);
-            var endDate = DateTime.Now;
-            var sprint = new ReviewSprint("Mayonaise wiki", startDate, endDate);
+            var sprint = new ReleaseSprint("Mayonaise wiki", startDate, endDate);
             var item = new BacklogItem("Update dutch mayonaise brands", "Update dutch brand entries with more information", null, DateTime.Now);
 
             //Act
@@ -84,17 +69,17 @@ namespace AvansDevOpsApplication.Tests
 
 
             //Assert
-            sprint.GetActiveState().Should().BeOfType<ActiveReviewState>();
+            sprint.GetActiveState().Should().BeOfType<ActiveReleaseState>();
             sprint.getBacklogItems().Should().HaveCount(1);
         }
 
         [Fact]
-        public void ShouldRemoveBacklogItemInActiveState()
+        public void ShouldRemoveBacklogItemInReleaseActiveState()
         {
             //Arrange
             var startDate = new DateTime(2023, 12, 25);
             var endDate = DateTime.Now;
-            var sprint = new ReviewSprint("Mayonaise wiki", startDate, endDate);
+            var sprint = new ReleaseSprint("Mayonaise wiki", startDate, endDate);
             var item = new BacklogItem("Update dutch mayonaise brands", "Update dutch brand entries with more information", null, DateTime.Now);
 
             //Act
@@ -104,7 +89,7 @@ namespace AvansDevOpsApplication.Tests
 
 
             //Assert
-            sprint.GetActiveState().Should().BeOfType<ActiveReviewState>();
+            sprint.GetActiveState().Should().BeOfType<ActiveReleaseState>();
             sprint.getBacklogItems().Should().HaveCount(0);
         }
     }
