@@ -12,7 +12,7 @@ namespace AvansDevOpsApplication.Tests
             //Arrange
             var birthday = new DateTime(2000, 1, 12);
             var notificationService = new EmailObserver();
-            var user = new User("Tom", "t@mail.com", 24, birthday, RoleType.DEVELOPER, notificationService);
+            var user = new User("Tom", "t@mail.com", birthday, RoleType.DEVELOPER, notificationService);
 
             //Act
             user.Role = RoleType.LEAD_DEVELOPER;
@@ -26,7 +26,7 @@ namespace AvansDevOpsApplication.Tests
             //Arrange
             var birthday = new DateTime(2000, 1, 12);
             var notificationService = new EmailObserver();
-            var user = new User("Tom", "t@mail.com", 24, birthday, RoleType.DEVELOPER, notificationService);
+            var user = new User("Tom", "t@mail.com", birthday, RoleType.DEVELOPER, notificationService);
 
             //Act
             user.Name = "Test";
@@ -41,7 +41,7 @@ namespace AvansDevOpsApplication.Tests
             //Arrange
             var birthday = new DateTime(2000, 1, 12);
             var notificationService = new EmailObserver();
-            var user = new User("Tom", "t@mail.com", 24, birthday, RoleType.DEVELOPER, notificationService);
+            var user = new User("Tom", "t@mail.com", birthday, RoleType.DEVELOPER, notificationService);
 
             //Act
             user.Email = "Test";
@@ -50,21 +50,6 @@ namespace AvansDevOpsApplication.Tests
             user.Email.Should().Be("Test");
             user.Email.Should().NotBe("t@mail.com");
         }
-        [Fact]
-        public void ShouldChangeAgeOfUser()
-        {
-            //Arrange
-            var birthday = new DateTime(2000, 1, 12);
-            var notificationService = new EmailObserver();
-            var user = new User("Tom", "t@mail.com", 24, birthday, RoleType.DEVELOPER, notificationService);
-
-            //Act
-            user.Age = 12;
-
-            //Assert
-            user.Age.Should().Be(12);
-            user.Age.Should().NotBe(24);
-        }
 
         [Fact]
         public void ShouldReturnToStringOfUser()
@@ -72,13 +57,13 @@ namespace AvansDevOpsApplication.Tests
             //Arrange
             var birthday = new DateTime(2000, 1, 12);
             var notificationService = new EmailObserver();
-            var user = new User("Tom", "t@mail.com", 24, birthday, RoleType.DEVELOPER, notificationService);
+            var user = new User("Tom", "t@mail.com", birthday, RoleType.DEVELOPER, notificationService);
 
             //Act
             var tostring = user.toString();
 
             //Assert
-            tostring.Should().BeEquivalentTo("User ~ Name; " + user.Name + " ~ Age; " + user.Age + " ~ Birthday; " + user.Birthday + " ~ Role; " + user.Role);
+            tostring.Should().BeEquivalentTo("User ~ Name; " + user.Name + " ~ Birthday; " + user.Birthday + " ~ Role; " + user.Role);
         }
     }
 }

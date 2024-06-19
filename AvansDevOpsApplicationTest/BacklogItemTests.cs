@@ -17,6 +17,21 @@ namespace AvansDevOpsApplication.Tests
         }
 
         [Fact]
+        public void ShouldAssignUserToBacklogItem()
+        {
+            //Arrange
+            var backlogItem = new BacklogItem("Turtle shop", "Backlog for the turtle shop project", null, DateTime.Now);
+            var user = new User("Max", "max@mail.com", DateTime.Now, RoleType.DEVELOPER, new EmailObserver());
+
+            //Act
+            backlogItem.AssignUser(user);
+
+            //Assert
+            backlogItem.GetState().Should().NotBeNull();
+            backlogItem.AssigedUsers.Should().HaveCount(1);
+        }
+
+        [Fact]
         public void ShouldAddActivityToList()
         {
             //Arrange
@@ -24,12 +39,10 @@ namespace AvansDevOpsApplication.Tests
             var activity = new Activity("Clean up unused imports in web project", "unused imports");
 
             //Act
-            var before = backlogItem.toString();
             backlogItem.AddActivityToList(activity);
-            var after = backlogItem.toString();
 
             //Assert
-            Assert.NotEqual(before, after);
+            backlogItem.Activitys.Should().HaveCount(1);  
         }
 
         [Fact]
@@ -47,7 +60,7 @@ namespace AvansDevOpsApplication.Tests
             //Arrange
             var localDate = new DateTime(2023, 12, 25, 10, 30, 50);
             var notificationService = new EmailObserver();
-            var user = new User("Tristan", "Tristan@mail.com", 60, localDate, RoleType.DEVELOPER, notificationService);
+            var user = new User("Tristan", "Tristan@mail.com", localDate, RoleType.DEVELOPER, notificationService);
             var backlogItem = new BacklogItem("Name", "Backlog for the turtle shop project", null, DateTime.Now);
             var activity = new Activity("help please", "");
         }
@@ -58,7 +71,7 @@ namespace AvansDevOpsApplication.Tests
             //Arrange
             var localDate = new DateTime(2023, 12, 25, 10, 30, 50);
             var notificationService = new EmailObserver();
-            var user = new User("Tristan", "Tristan@mail.com", 60, localDate, RoleType.DEVELOPER, notificationService);
+            var user = new User("Tristan", "Tristan@mail.com", localDate, RoleType.DEVELOPER, notificationService);
             var backlogItem = new BacklogItem("Name", "Backlog for the turtle shop project", null, DateTime.Now);
 
             //Act
@@ -75,7 +88,7 @@ namespace AvansDevOpsApplication.Tests
             //Arrange
             var localDate = new DateTime(2023, 12, 25, 10, 30, 50);
             var notificationService = new EmailObserver();
-            var user = new User("Tristan", "Tristan@mail.com", 60, localDate, RoleType.DEVELOPER, notificationService);
+            var user = new User("Tristan", "Tristan@mail.com", localDate, RoleType.DEVELOPER, notificationService);
             var backlogItem = new BacklogItem("Name", "Backlog for the turtle shop project", null, DateTime.Now);
             var activity = new Activity("help please", "");
         }
@@ -86,7 +99,7 @@ namespace AvansDevOpsApplication.Tests
             //Arrange
             var localDate = new DateTime(2023, 12, 25, 10, 30, 50);
             var notificationService = new EmailObserver();
-            var user = new User("Tristan", "Tristan@mail.com", 60, localDate, RoleType.DEVELOPER, notificationService);
+            var user = new User("Tristan", "Tristan@mail.com", localDate, RoleType.DEVELOPER, notificationService);
             var backlogItem = new BacklogItem("Name", "Backlog for the turtle shop project", null, DateTime.Now);
             var activity = new Activity("help please", "");
         }
@@ -97,7 +110,7 @@ namespace AvansDevOpsApplication.Tests
             //Arrange
             var localDate = new DateTime(2023, 12, 25, 10, 30, 50);
             var notificationService = new EmailObserver();
-            var user = new User("Tristan", "Tristan@mail.com", 60, localDate, RoleType.DEVELOPER, notificationService);
+            var user = new User("Tristan", "Tristan@mail.com", localDate, RoleType.DEVELOPER, notificationService);
             var backlogItem = new BacklogItem("Name", "Backlog for the turtle shop project", null, DateTime.Now);
             var activity = new Activity("help please", "");
         }

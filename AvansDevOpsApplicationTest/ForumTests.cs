@@ -22,7 +22,7 @@ namespace AvansDevOpsApplication.Tests
         public void ShouldAddForumPost()
         {
             //Arrange
-            var user = new User("John", "john@example.com", 30, new DateTime(1992, 1, 1), RoleType.DEVELOPER, new EmailObserver());
+            var user = new User("John", "john@example.com", new DateTime(1992, 1, 1), RoleType.DEVELOPER, new EmailObserver());
             var backlogItem = new BacklogItem("Name", "Backlog for the turtle shop project", null, DateTime.Now);
             var forum = new Forum(backlogItem);
             var reactions = new List<ForumComponent>();
@@ -39,7 +39,7 @@ namespace AvansDevOpsApplication.Tests
         public void ShouldAddReactionToForumPost()
         {
             //Arrange
-            var user = new User("John", "john@example.com", 30, new DateTime(1992, 1, 1), RoleType.DEVELOPER, new EmailObserver());
+            var user = new User("John", "john@example.com", new DateTime(1992, 1, 1), RoleType.DEVELOPER, new EmailObserver());
             var backlogItem = new BacklogItem("Name", "Backlog for the turtle shop project", null, DateTime.Now);
             var forum = new Forum(backlogItem);
             var reaction = new Reaction("42", DateTime.Now, user);
@@ -57,7 +57,7 @@ namespace AvansDevOpsApplication.Tests
         public void ShouldRemoveReactionToForumPost()
         {
             //Arrange
-            var user = new User("John", "john@example.com", 30, new DateTime(1992, 1, 1), RoleType.DEVELOPER, new EmailObserver());
+            var user = new User("John", "john@example.com", new DateTime(1992, 1, 1), RoleType.DEVELOPER, new EmailObserver());
             var backlogItem = new BacklogItem("Name", "Backlog for the turtle shop project", null, DateTime.Now);
             var forum = new Forum(backlogItem);
             var reaction = new Reaction("42", DateTime.Now, user);
@@ -77,7 +77,7 @@ namespace AvansDevOpsApplication.Tests
         public void ShouldPrint()
         {
             //Arrange
-            var user = new User("John", "john@example.com", 30, new DateTime(1992, 1, 1), RoleType.DEVELOPER, new EmailObserver());
+            var user = new User("John", "john@example.com", new DateTime(1992, 1, 1), RoleType.DEVELOPER, new EmailObserver());
             var backlogItem = new BacklogItem("Name", "Backlog for the turtle shop project", null, DateTime.Now);
             var forum = new Forum(backlogItem);
             var reaction = new Reaction("42", DateTime.Now, user);

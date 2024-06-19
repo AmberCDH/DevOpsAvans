@@ -10,7 +10,7 @@ namespace AvansDevOpsApplication.Tests
         {
             // Arrange
             var backlogItem = new BacklogItem("Task 1", "Description of Task 1", null, DateTime.Now);
-            var emailUser = new User("John", "john@example.com", 30, new DateTime(1992, 1, 1), RoleType.DEVELOPER, new EmailObserver());
+            var emailUser = new User("John", "john@example.com", new DateTime(1992, 1, 1), RoleType.DEVELOPER, new EmailObserver());
             StringWriter writer = new StringWriter();
             Console.SetOut(writer);
         }
@@ -20,7 +20,7 @@ namespace AvansDevOpsApplication.Tests
         {
             // Arrange
             var backlogItem = new BacklogItem("Task 1", "Description of Task 1", null, DateTime.Now);
-            var slackUser = new User("John", "john@example.com", 30, new DateTime(1992, 1, 1), RoleType.DEVELOPER, new SlackObserver());
+            var slackUser = new User("John", "john@example.com", new DateTime(1992, 1, 1), RoleType.DEVELOPER, new SlackObserver());
             StringWriter writer = new StringWriter();
             Console.SetOut(writer);
         }

@@ -33,8 +33,8 @@ static void ExportPDF()
     var backlogItem = new BacklogItem("Als gebruiker...", "Nice description", null, localDate);
     var birthday = new DateTime(2000, 1, 12);
     var notificationService = new EmailObserver();
-    var user = new User("Tom", "t@mail.com", 24, birthday, RoleType.LEAD_DEVELOPER, notificationService);
-    var user1 = new User("Tristan", "t@mail.com", 24, birthday, RoleType.LEAD_DEVELOPER, notificationService);
+    var user = new User("Tom", "t@mail.com", birthday, RoleType.LEAD_DEVELOPER, notificationService);
+    var user1 = new User("Tristan", "t@mail.com", birthday, RoleType.LEAD_DEVELOPER, notificationService);
 
     List<User> users = [user, user1];
     Report report = new Report();
@@ -51,7 +51,7 @@ static void Composite()
     var backlogItem = new BacklogItem("Als gebruiker...", "Nice description", null, localDate);
     var birthday = new DateTime(2000, 1, 12);
     var notificationService = new EmailObserver();
-    var user = new User("Tom", "t@mail.com", 24, birthday, RoleType.LEAD_DEVELOPER, notificationService);
+    var user = new User("Tom", "t@mail.com", birthday, RoleType.LEAD_DEVELOPER, notificationService);
 
     List<ForumComponent> reactionsUS1 = [new Reaction("Niemand gebruikt dit", localDate, user)];
     List<ForumComponent> reactionsUS2 = [new Reaction("Ik ga huilen hoor", localDate, user), new Reaction("...", localDate, user)];
@@ -67,7 +67,7 @@ static void UserRoles()
 {
     var birthday = new DateTime(2000, 1, 12);
     var notificationService = new EmailObserver();
-    var user = new User("Tom", "t@mail.com", 24, birthday, RoleType.LEAD_DEVELOPER, notificationService);
+    var user = new User("Tom", "t@mail.com", birthday, RoleType.LEAD_DEVELOPER, notificationService);
 
     Console.WriteLine(user.toString());
     user.Name = "Test";
@@ -128,8 +128,8 @@ static void TestBacklogItemState()
     activitys.Add(activity2);
     var backlogItem = new BacklogItem("Test", "Test", activitys, DateTime.Now);
     var notificationService = new EmailObserver();
-    var user = new User("Test", "test", 5, DateTime.Now, RoleType.LEAD_DEVELOPER, notificationService);
-    var testUser = new User("Test", "test", 5, DateTime.Now, RoleType.TESTER, notificationService);
+    var user = new User("Test", "test", DateTime.Now, RoleType.LEAD_DEVELOPER, notificationService);
+    var testUser = new User("Test", "test", DateTime.Now, RoleType.TESTER, notificationService);
     backlogItem.AssignUser(user);
     backlogItem.ChangeState(backlogItem.GetDoingState());
     backlogItem.RemoveUser(user);
