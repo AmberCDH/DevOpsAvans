@@ -13,7 +13,7 @@ namespace AvansDevOpsApplication.Domain.StrategySprint
         {
             activeState = new ActiveReviewState(this);
             createdState = new CreatedReviewState(this);
-            pipelineState = new PipelineReviewState(this);
+            pipelineState = new PipelineReviewState();
             finishedState = new FinishedReviewState();
             base.SetState(createdState);
         }

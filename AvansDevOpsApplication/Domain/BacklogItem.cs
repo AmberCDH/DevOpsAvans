@@ -12,7 +12,6 @@ namespace AvansDevOpsApplication.Domain
         private List<Activity> activitys;
         private User user;
         private bool wantsNotification;
-        private string inList;
         private int effort;
         private DateTime timeOfCreation;
         private DateTime timeCompleted;
