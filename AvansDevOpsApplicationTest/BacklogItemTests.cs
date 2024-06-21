@@ -1,5 +1,4 @@
 ﻿using AvansDevOpsApplication.Domain;
-using AvansDevOpsApplication.Domain.ItemState;
 using AvansDevOpsApplication.Domain.NotificationObserver;
 using FluentAssertions;
 
@@ -96,9 +95,12 @@ namespace AvansDevOpsApplication.Tests
         public void ShouldNotSetDoing()
         {
             //Arrange
-            var localDate = new DateTime(2023, 12, 25, 10, 30, 50);
             var backlogItem = new BacklogItem("Name", "Backlog for the turtle shop project", null, DateTime.Now);
-            var activity = new Activity("help please", "Help");
+
+            //act
+            backlogItem.ChangeState(backlogItem.GetDoingState());
+            //assert
+            backlogItem.GetState().Should().NotBe(backlogItem.GetDoingState());
         }
 
         [Fact]
@@ -109,7 +111,12 @@ namespace AvansDevOpsApplication.Tests
             var notificationService = new EmailObserver();
             var user = new User("Tristan", "Tristan@mail.com", localDate, RoleType.DEVELOPER, notificationService);
             var backlogItem = new BacklogItem("Name", "Backlog for the turtle shop project", null, DateTime.Now);
-            var activity = new Activity("help please", "");
+
+            //act
+            backlogItem.AssignUser(user);
+            backlogItem.ChangeState(backlogItem.GetDoingState());
+            //assert
+            backlogItem.GetState().Should().Be(backlogItem.GetDoingState());
         }
 
         [Fact]
@@ -135,9 +142,19 @@ namespace AvansDevOpsApplication.Tests
             //Arrange
             var localDate = new DateTime(2023, 12, 25, 10, 30, 50);
             var notificationService = new EmailObserver();
-            var user = new User("Tristan", "Tristan@mail.com", localDate, RoleType.DEVELOPER, notificationService);
+            var tester = new User("Tristan", "Tristan@mail.com", localDate, RoleType.TESTER, notificationService);
+            var developer = new User("Tristan", "Tristan@mail.com", localDate, RoleType.DEVELOPER, notificationService);
             var backlogItem = new BacklogItem("Name", "Backlog for the turtle shop project", null, DateTime.Now);
-            var activity = new Activity("help please", "");
+
+            //Act
+            backlogItem.AssignUser(developer);
+            backlogItem.ChangeState(backlogItem.GetDoingState());
+            backlogItem.ChangeState(backlogItem.GetReadyForTestingState());
+            backlogItem.AssignUser(tester);
+            backlogItem.ChangeState(backlogItem.GetTestingState());
+
+            //Assert
+            backlogItem.GetState().Should().Be(backlogItem.GetTestingState());
         }
 
         [Fact]
@@ -146,9 +163,20 @@ namespace AvansDevOpsApplication.Tests
             //Arrange
             var localDate = new DateTime(2023, 12, 25, 10, 30, 50);
             var notificationService = new EmailObserver();
-            var user = new User("Tristan", "Tristan@mail.com", localDate, RoleType.DEVELOPER, notificationService);
+            var tester = new User("Tristan", "Tristan@mail.com", localDate, RoleType.TESTER, notificationService);
+            var developer = new User("Tristan", "Tristan@mail.com", localDate, RoleType.DEVELOPER, notificationService);
             var backlogItem = new BacklogItem("Name", "Backlog for the turtle shop project", null, DateTime.Now);
-            var activity = new Activity("help please", "");
+
+            //Act
+            backlogItem.AssignUser(developer);
+            backlogItem.ChangeState(backlogItem.GetDoingState());
+            backlogItem.ChangeState(backlogItem.GetReadyForTestingState());
+            backlogItem.AssignUser(tester);
+            backlogItem.ChangeState(backlogItem.GetTestingState());
+            backlogItem.ChangeState(backlogItem.GetDoneState());
+
+            //Assert
+            backlogItem.GetState().Should().Be(backlogItem.GetDoneState());
         }
 
         [Fact]
@@ -157,9 +185,15 @@ namespace AvansDevOpsApplication.Tests
             //Arrange
             var localDate = new DateTime(2023, 12, 25, 10, 30, 50);
             var notificationService = new EmailObserver();
-            var user = new User("Tristan", "Tristan@mail.com", localDate, RoleType.DEVELOPER, notificationService);
+            var tester = new User("Tristan", "Tristan@mail.com", localDate, RoleType.TESTER, notificationService);
+            var developer = new User("Tristan", "Tristan@mail.com", localDate, RoleType.DEVELOPER, notificationService);
             var backlogItem = new BacklogItem("Name", "Backlog for the turtle shop project", null, DateTime.Now);
-            var activity = new Activity("help please", "");
+
+            //Act
+            backlogItem.ChangeState(backlogItem.GetDoneState());
+
+            //Assert
+            backlogItem.GetState().Should().NotBe(backlogItem.GetDoneState());
         }
 
         [Fact]

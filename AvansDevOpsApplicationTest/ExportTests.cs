@@ -3,11 +3,6 @@ using AvansDevOpsApplication.Domain.Factory;
 using AvansDevOpsApplication.Domain.FactoryReport;
 using FluentAssertions;
 using QuestPDF.Infrastructure;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AvansDevOpsApplication.Tests
 {
@@ -25,6 +20,9 @@ namespace AvansDevOpsApplication.Tests
 
             //Act
             exportPdf.exportReport(header, footer, users);
+
+            //assert
+            exportPdf.Should().BeOfType<PdfReportCreator>();
         }
 
         [Fact]
@@ -38,6 +36,8 @@ namespace AvansDevOpsApplication.Tests
 
             //Act
             exportPng.exportReport(header, footer, users);
+            //assert
+            exportPng.Should().BeOfType<PngReportCreator>();
         }
 
         [Fact]

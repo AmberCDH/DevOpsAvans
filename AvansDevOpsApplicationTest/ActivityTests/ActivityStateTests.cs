@@ -32,9 +32,14 @@ namespace AvansDevOpsApplication.Tests.ActivityTests
         public void ShouldSetActivityToDone()
         {
             //Arrange
-            var localDate = new DateTime(2023, 12, 25, 10, 30, 50);
-            var backlogItem = new BacklogItem("Name", "Nice description", null, localDate);
             var activity = new Activity("help please", "Help");
+
+
+            //Act
+            activity.SetState(new DoneActivityState());
+
+            //Assert
+            activity.getState().Should().BeOfType<DoneActivityState>();
 
         }
 
@@ -42,9 +47,15 @@ namespace AvansDevOpsApplication.Tests.ActivityTests
         public void ShouldNotSetActivityTodo()
         {
             //Arrange
-            var localDate = new DateTime(2023, 12, 25, 10, 30, 50);
-            var backlogItem = new BacklogItem("Name", "Backlog for the turtle shop project", null, DateTime.Now);
-            var activity = new Activity("help please", "");
+            var activity = new Activity("Change div on the bottom of the page", "change div location");
+
+            //Act
+            activity.SetState(new DoneActivityState());
+            activity.ChangeState(new ToDoActivityState(activity));
+
+
+            //Assert
+            activity.getState().Should().NotBeOfType<ToDoActivityState>();
         }
     }
 }
