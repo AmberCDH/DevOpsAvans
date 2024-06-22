@@ -34,7 +34,6 @@ namespace AvansDevOpsApplication.Tests.ActivityTests
             //Arrange
             var activity = new Activity("help please", "Help");
 
-
             //Act
             activity.SetState(new DoneActivityState());
 

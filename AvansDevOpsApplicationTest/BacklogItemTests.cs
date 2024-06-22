@@ -1,4 +1,6 @@
 ﻿using AvansDevOpsApplication.Domain;
+using AvansDevOpsApplication.Domain.ActivityState;
+using AvansDevOpsApplication.Domain.ItemState;
 using AvansDevOpsApplication.Domain.NotificationObserver;
 using FluentAssertions;
 
@@ -6,6 +8,12 @@ namespace AvansDevOpsApplication.Tests
 {
     public class BacklogItemTests
     {
+        private readonly List<Activity> activities =
+        [
+            new Activity(comment:"Add penquin to animal database", name:"Add animal"),
+            new Activity(comment:"Add fox to animal database", name:"Add animal"),
+        ];
+
         [Fact]
         public void ShouldCreateBacklogItem()
         {
@@ -42,7 +50,7 @@ namespace AvansDevOpsApplication.Tests
             backlogItem.AddActivityToList(activity);
 
             //Assert
-            backlogItem.Activitys.Should().HaveCount(1);  
+            backlogItem.Activitys.Should().HaveCount(1);
         }
 
         [Fact]
@@ -292,6 +300,39 @@ namespace AvansDevOpsApplication.Tests
 
             //Assert
             backlogItem.GetState().Should().Be(backlogItem.GetReadyForTestingState());
+        }
+
+        [Fact]
+        public void ShouldReturnTrueWhenAllActivitiesAreDone()
+        {
+            //Arrange
+            var activityList = activities;
+            var workitem = new BacklogItem("Animal project", "Animal database project", activityList, DateTime.Now);
+            activityList.ForEach(x =>
+            {
+                x.SetState(new DoneActivityState());
+            });
+
+            //Act
+            var done = workitem.activitysDone();
+
+            //Assert
+            done.Should().Be(true);
+        }
+
+        [Fact]
+        public void ShouldReturnFalseWhenOneActivityIsNotDone()
+        {
+            //Arrange
+            var activityList = activities;
+            var workitem = new BacklogItem("Animal project", "Animal database project", activityList, DateTime.Now);
+            activityList.First().SetState(new DoneActivityState());
+
+            //Act
+            var done = workitem.activitysDone();
+
+            //Assert
+            done.Should().Be(false);
         }
     }
 }
