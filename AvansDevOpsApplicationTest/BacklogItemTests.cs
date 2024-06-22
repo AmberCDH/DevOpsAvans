@@ -229,7 +229,7 @@ namespace AvansDevOpsApplication.Tests
         }
 
         [Fact]
-        public void ShouldChangeStateToTestingIfAssignedTester()
+        public void ShouldChangeStateWithTesterAndTestingState()
         {
             //Arrange
             var notificationService = new EmailObserver();
@@ -246,7 +246,23 @@ namespace AvansDevOpsApplication.Tests
         }
 
         [Fact]
-        public void ShouldNotChangeStateToTestingIfNoAssignedTester()
+        public void ShouldNotChangeStateWithoutTester()
+        {
+            //Arrange
+            var notificationService = new EmailObserver();
+            var user = new User("Tristan", "Tristan@mail.com", DateTime.Now, RoleType.DEVELOPER, notificationService);
+            var backlogItem = new BacklogItem("Name", "Backlog for the turtle shop project", null, DateTime.Now);
+
+            //Act
+            backlogItem.SetState(backlogItem.GetReadyForTestingState());
+            backlogItem.ChangeState(backlogItem.GetTestingState());
+
+            //Assert
+            backlogItem.GetState().Should().Be(backlogItem.GetReadyForTestingState());
+        }
+
+        [Fact]
+        public void ShouldNotChangeStateWithoutTestingState()
         {
             //Arrange
             var notificationService = new EmailObserver();
@@ -256,7 +272,23 @@ namespace AvansDevOpsApplication.Tests
             //Act
             backlogItem.SetState(backlogItem.GetReadyForTestingState());
             backlogItem.AssignUser(user);
-            backlogItem.ChangeState(backlogItem.GetTestingState());
+            backlogItem.ChangeState(backlogItem.GetDoingState());
+
+            //Assert
+            backlogItem.GetState().Should().Be(backlogItem.GetReadyForTestingState());
+        }
+
+        [Fact]
+        public void ShouldNotChangeStateWithoutTesterWithoutTestingState()
+        {
+            //Arrange
+            var notificationService = new EmailObserver();
+            var user = new User("Tristan", "Tristan@mail.com", DateTime.Now, RoleType.TESTER, notificationService);
+            var backlogItem = new BacklogItem("Name", "Backlog for the turtle shop project", null, DateTime.Now);
+
+            //Act
+            backlogItem.SetState(backlogItem.GetReadyForTestingState());
+            backlogItem.ChangeState(backlogItem.GetDoingState());
 
             //Assert
             backlogItem.GetState().Should().Be(backlogItem.GetReadyForTestingState());
